@@ -1,11 +1,11 @@
 <div class="wrapper">
-    <div class="page-header" style="background-image: url('./assets/img/armiarma-bg.jpg');">
+    <div class="page-header" style="background-image: url('./assets/img/bilbao-bg2.jpg');">
       <div class="filter"></div>
       <div class="container">
         <div class="row">
           <div class="col-lg-4 col-sm-6 mr-auto ml-auto">
             <div class="card card-register card-opacity">
-              <h2 class="title">Welcome</h2>
+              <h2 class="text-white text-center">Welcome</h2>
               <form class="register-form" (ngSubmit)="login()">
                 <label>Email</label>
                 <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus}">
@@ -27,13 +27,10 @@
                   <input type="password" class="form-control" placeholder="Password" [(ngModel)]="password" name="password" required>
                 </div>
   
-                <button type="submit" class="btn btn-danger btn-block btn-round">Login</button>
+                <button type="submit" class="btn btn-block btn-round" style="background: linear-gradient(90deg, rgba(35,164,212,1) 0%, rgba(0,137,159,1) 32%, rgba(9,9,121,1) 100%);">Login</button>
               </form>
               <div *ngIf="errorMessage" class="alert alert-danger mt-2">
                 {{ errorMessage }}
-              </div>
-              <div class="forgot">
-                <a href="#" class="btn btn-link btn-danger">Forgot password?</a>
               </div>
             </div>
           </div>

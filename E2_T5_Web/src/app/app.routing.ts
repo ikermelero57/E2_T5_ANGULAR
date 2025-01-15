@@ -9,6 +9,14 @@ import { SignupComponent } from './examples/signup/signup.component';
 import { LandingComponent } from './examples/landing/landing.component';
 import { NucleoiconsComponent } from './components/nucleoicons/nucleoicons.component';
 import { AuthGuard } from './auth.guard';
+import { AdminComponent } from './components/admin/admin.component';
+import { GodComponent } from './components/god/god.component';
+import { StudentComponent } from './components/student/student.component';
+import { TeacherComponent } from './components/teacher/teacher.component';
+
+StudentComponent
+
+GodComponent
 
 const routes: Routes = [
   { path: '', redirectTo: 'signup', pathMatch: 'full' },
@@ -17,6 +25,9 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'landing', component: LandingComponent, canActivate: [AuthGuard] },
   { path: 'nucleoicons', component: NucleoiconsComponent, canActivate: [AuthGuard] },
+  { path: 'admin', component: AdminComponent },
+  { path: 'teacher', component: IrakasleComponent },
+  { path: 'student', component: StudentComponent },
 ];
 
 @NgModule({
