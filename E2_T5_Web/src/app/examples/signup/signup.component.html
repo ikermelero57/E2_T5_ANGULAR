@@ -1,0 +1,47 @@
+<div class="wrapper">
+    <div class="page-header" style="background-image: url('./assets/img/armiarma-bg.jpg');">
+      <div class="filter"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-sm-6 mr-auto ml-auto">
+            <div class="card card-register card-opacity">
+              <h2 class="title">Welcome</h2>
+              <form class="register-form" (ngSubmit)="login()">
+                <label>Email</label>
+                <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus}">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="nc-icon nc-email-85"></i>
+                    </span>
+                  </div>
+                  <input type="email" class="form-control" placeholder="Email" [(ngModel)]="email" name="email" required>
+                </div>
+  
+                <label>Password</label>
+                <div class="input-group form-group-no-border" [ngClass]="{'input-group-focus':focus1}">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="nc-icon nc-key-25"></i>
+                    </span>
+                  </div>
+                  <input type="password" class="form-control" placeholder="Password" [(ngModel)]="password" name="password" required>
+                </div>
+  
+                <button type="submit" class="btn btn-danger btn-block btn-round">Login</button>
+              </form>
+              <div *ngIf="errorMessage" class="alert alert-danger mt-2">
+                {{ errorMessage }}
+              </div>
+              <div class="forgot">
+                <a href="#" class="btn btn-link btn-danger">Forgot password?</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer register-footer text-center">
+          <h6>&copy;{{test | date: 'yyyy'}}, made with <i class="fa fa-heart heart"></i> by Elorrieta Studients</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+  
