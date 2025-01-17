@@ -37,6 +37,24 @@ app.get('/users', (req, res) => {
     });
 });
 
+app.get('/horarios', (req, res) => {
+    const profeId = req.query.profe_id;
+    if (!profeId) {
+      return res.status(400).send('El parámetro profe_id es obligatorio.');
+    }
+  
+    const query = 'SELECT * FROM horarios WHERE profe_id = ?';
+    db.query(query, [profeId], (err, results) => {
+      if (err) {
+        console.error('Error al obtener los horarios:', err);
+        return res.status(500).send('Error interno del servidor');
+      }
+  
+      res.send(results);
+    });
+});
+  
+
 
 app.post('/users', (req, res) => {
     const newItem = req.body;
@@ -85,7 +103,7 @@ app.post('/users/login', (req, res) => {
         res.json({ success: false, message: 'Invalid email or password' });
       }
     });
-  });
+});
 
 
 // Zerbitzaria hasieratu

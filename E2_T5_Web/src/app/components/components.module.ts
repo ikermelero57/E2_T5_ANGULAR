@@ -14,6 +14,13 @@ import { ComponentsComponent } from './components.component';
 import { NotificationComponent } from './notification/notification.component';
 import { NgbdModalComponent } from './modal/modal.component';
 import { NgbdModalContent } from './modal/modal.component';
+import { AdminComponent } from './admin/admin.component';
+import { GodComponent } from './god/god.component';
+import { StudentComponent } from './student/student.component';
+import { TeacherComponent } from './teacher/teacher.component';
+import { SignupComponent } from './signup/signup.component';
+
+
 
 @NgModule({
     imports: [
@@ -31,6 +38,11 @@ import { NgbdModalContent } from './modal/modal.component';
         TypographyComponent,
         NucleoiconsComponent,
         NotificationComponent,
+        // SignupComponent,
+        AdminComponent,
+        GodComponent,
+        StudentComponent,
+        TeacherComponent,
         NgbdModalComponent,
         NgbdModalContent
     ],

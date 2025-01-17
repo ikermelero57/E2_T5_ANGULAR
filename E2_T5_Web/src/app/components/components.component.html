@@ -8,7 +8,7 @@
                         <img src="assets/img/logo-elorrieta.png" alt="" style="width: 20em;">
                     </div>
                     <h1 class="presentation-title">Ongi Etorri</h1>
-                    <h3 class="presentation-title">GILIPOLLAS</h3>
+                    <h3 class="presentation-title2">{{ userName }} {{ userSurname}}</h3>
                     <div class="fog-low">
                         <img src="assets/img/fog-low.png" alt="">
                     </div>
@@ -16,20 +16,31 @@
                         <img src="assets/img/fog-low.png" alt="">
                     </div>
                 </div>
-
-                <h3 class="presentation-subtitle text-center">Created by Elorrieta STUDENTS</h3>
             </div>
         </div>
         <div class="moving-clouds" style="background-image: url('assets/img/clouds.png'); "></div>
-        <h6 class=" category-absolute ml-auto mr-auto">Designed and coded by
-        <!-- <h6 class="category category-absolute">Designed and coded by -->
-
-            <a href="https://www.creative-tim.com" target="_blank">
-                <img src="assets/img/creative-tim-white-slim2.png" class="creative-tim-logo">
-            </a>
-        </h6>
+       
     </div>
     <div class="main">
+        <!-- Mostrar componente según el tipo de usuario -->
+        <ng-container *ngIf="userRole === 1">
+            <app-god></app-god>
+        </ng-container>
+        <ng-container *ngIf="userRole === 2">
+            <app-admin></app-admin>
+        </ng-container>
+        <ng-container *ngIf="userRole === 3">
+            <app-teacher></app-teacher>
+        </ng-container>
+        <ng-container *ngIf="userRole === 4">
+            <app-student></app-student>
+        </ng-container>
+        <!-- Si no hay usuario logueado -->
+        <ng-container *ngIf="!userRole">
+            <p class="text-center">No hay usuario logueado. Por favor, inicia sesión.</p>
+        </ng-container>
+    </div>
+    <!-- <div class="main">
       <app-basicelements></app-basicelements>
       <app-navigation></app-navigation>
       <div class="section">
@@ -374,5 +385,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>

@@ -24,18 +24,12 @@ export class SignupComponent implements OnInit {
         this.apiService.validateUser(this.email, this.password).subscribe({
           next: (response: any) => {
             if (response.success) {
-              alert('Login successful'+ response);
+              // alert('Login successful'+ response);
+              console.log(response);
+              localStorage.setItem('user', JSON.stringify(response.user));
+             
+                this.router.navigate(['/home']); // Redirige al componente admin
               
-              // Comprobar el tipo_id y redirigir a la página correspondiente
-              if (response.tipo_id === 1) {
-                this.router.navigate(['/admin']); // Redirige al componente admin
-              } else if (response.tipo_id === 3) {
-                this.router.navigate(['/irakasle']); // Redirige al componente irakasle
-              } else if (response.tipo_id === 4) {
-                this.router.navigate(['/ikasle']); // Redirige al componente ikasle
-              } else {
-                this.errorMessage = 'Invalid user type';
-              }
             } else {
               // Si el login falla, muestra el error
               this.errorMessage = 'Invalid email or password';

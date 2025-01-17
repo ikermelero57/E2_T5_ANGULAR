@@ -2,6 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+export interface Horario {
+  dia: string;
+  hora: string;
+  profe_id: number;
+  modulo_id: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -16,7 +23,10 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/users/login`, { email, password });
   }
 
-
+  getHorariosByProfeId(profeId: number): Observable<Horario[]> {
+    return this.http.get<Horario[]>(`${this.baseUrl}/horarios?profe_id=${profeId}`);
+  }
+  
   // USERS
   getUsers() {
     return this.http.get(`${this.baseUrl}/users`);

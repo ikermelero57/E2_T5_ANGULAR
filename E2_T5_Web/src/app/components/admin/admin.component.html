@@ -1,3 +1,70 @@
-<p>
-  admin works!
-</p>
+<div class="wrapper">
+  
+  <div class="section profile-content">
+      <div class="container">
+          <div class="owner">
+            <div class="avatar">
+                <!-- Mostrar user.argazkia si existe, de lo contrario mostrar una imagen por defecto -->
+                <img [src]="userImage ? userImage : './assets/img/default-user.png'"  alt="Circle Image" class="img-circle img-no-padding img-responsive">
+              </div>
+              
+              <div class="name">
+                  <h4 class="title"><br />{{userName}} {{userSurname}}</h4>
+                  <h6 class="description" *ngIf="userRole === 1">God</h6>
+                  <h6 class="description" *ngIf="userRole === 2">Admin</h6>
+                  <h6 class="description" *ngIf="userRole === 3">Profesor</h6>
+                  <h6 class="description" *ngIf="userRole === 4">Alumno</h6>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6 ml-auto mr-auto text-center">
+                  <p>texto explicativo de lo que puede hacer un admin (crear, editar, eliminar y visualizar datos)</p>
+                  <br />
+                  <button class="btn btn-outline-default btn-round"><i class="fa fa-cog"></i> Admin Panel</button>
+              </div>
+          </div>
+          <br/>
+          <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <ngb-tabset [justify]="'center'">
+                  <ngb-tab title="Horario">
+                    <ng-template ngbTabContent>
+                      <div class="row following" id="follows">
+                        <h4>Horarios</h4>
+                        <table class="table table-bordered text-center">
+                          <thead>
+                            <tr>
+                              <th>Hora</th>
+                              <th *ngFor="let day of weekDays">{{ day }}</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let hour of hours">
+                              <td>{{ hour }}</td>
+                              <td *ngFor="let day of weekDays">
+                                <div *ngFor="let horario of getHorariosForDayAndHour(day, hour)">
+                                  {{ horario.modulo_id }}
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </ng-template>
+                  </ngb-tab>
+                
+                  <ngb-tab title="Reuniones">
+                    <ng-template ngbTabContent>
+                      <div class="row following" id="follows">
+                        <!-- Mostrar una lista de todas las reuniones del usuario -->
+                        <h4>Reuniones</h4>
+                      </div>
+                    </ng-template>
+                  </ngb-tab>
+                </ngb-tabset>
+                
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
