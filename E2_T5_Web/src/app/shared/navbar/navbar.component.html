@@ -15,7 +15,7 @@
                     <!-- Mostrar menú según tipo de usuario -->
                     <ng-container *ngIf="userRole === 1">
                         <li class="nav-item">
-                            <a [routerLink]="['/god']" class="nav-link">God Dashboard</a>
+                            <a [routerLink]="['/god']" class="nav-link">God Panel</a>
                         </li>
                     </ng-container>
                     <ng-container *ngIf="userRole === 2">
@@ -25,7 +25,7 @@
                     </ng-container>
                     <ng-container *ngIf="userRole === 3">
                         <li class="nav-item">
-                            <a [routerLink]="['/teacher']" class="nav-link">Teacher Resources</a>
+                            <a [routerLink]="['/teacher']" class="nav-link">Teacher Zone</a>
                         </li>
                     </ng-container>
                     <ng-container *ngIf="userRole === 4">

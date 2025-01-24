@@ -43,7 +43,7 @@
                               <td>{{ hour }}</td>
                               <td *ngFor="let day of weekDays">
                                 <div *ngFor="let horario of getHorariosForDayAndHour(day, hour)">
-                                  {{ horario.modulo_id }}
+                                  {{ horario.modulo }}
                                 </div>
                               </td>
                             </tr>
@@ -55,9 +55,36 @@
                 
                   <ngb-tab title="Reuniones">
                     <ng-template ngbTabContent>
-                      <div class="row following" id="follows">
-                        <!-- Mostrar una lista de todas las reuniones del usuario -->
+                      <div class=" d-flex flex-column following" id="follows">
                         <h4>Reuniones</h4>
+                        <table *ngIf="reuniones && reuniones.length > 0; else noReuniones" class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th>Título</th>
+                              <th>Asunto</th>
+                              <th>Aula</th>
+                              <th>Fecha</th>
+                              <th>Estado</th>
+                              <th>Profesor</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let reunion of reuniones">
+                              <td>{{ reunion.titulo }}</td>
+                              <td>{{ reunion.asunto }}</td>
+                              <td>{{ reunion.aula }}</td>
+                              <td>{{ reunion.fecha | date : "dd/MM/yyyy HH:mm" }}</td>
+                              <td>{{ reunion.estado | titlecase }}</td>
+                              <td>
+                                {{ reunion.alumno_nombre }}
+                                {{ reunion.alumno_apellidos }}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <ng-template #noReuniones>
+                          <p>No tienes reuniones.</p>
+                        </ng-template>
                       </div>
                     </ng-template>
                   </ngb-tab>

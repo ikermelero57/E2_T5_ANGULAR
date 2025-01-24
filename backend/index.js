@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+// const pool = require('./db');
 
 
 const app = express();
@@ -37,24 +38,158 @@ app.get('/users', (req, res) => {
     });
 });
 
-app.get('/horarios', (req, res) => {
-    const profeId = req.query.profe_id;
-    if (!profeId) {
-      return res.status(400).send('El parámetro profe_id es obligatorio.');
-    }
-  
-    const query = 'SELECT * FROM horarios WHERE profe_id = ?';
-    db.query(query, [profeId], (err, results) => {
-      if (err) {
-        console.error('Error al obtener los horarios:', err);
-        return res.status(500).send('Error interno del servidor');
-      }
-  
-      res.send(results);
-    });
+app.get('/horarios', async (req, res) => {
+  try {
+      const profeId = req.query.profe_id;
+      const query = `
+          SELECT h.dia, h.hora, h.profe_id, m.nombre AS modulo
+          FROM horarios h
+          JOIN modulos m ON h.modulo_id = m.id
+          WHERE h.profe_id = ?
+      `;
+      db.query(query, [profeId], (err, results) => {
+        if(err){
+          console.error('Error al obtener los horarios:', err);
+          return res.status(500).send('Error interno del servidor');
+        }
+      res.send(results)
+      });
+  } catch (error) {
+      console.error('Error al obtener los horarios:', error);
+      res.status(500).json({ error: 'Error al obtener los horarios' });
+  }
 });
-  
 
+app.get('/horarios-estudiante', async (req, res) => {
+  try {
+      const estudianteId = req.query.estudiante_id; // Obtenemos el ID del estudiante desde los parámetros de consulta
+      const query = `
+        SELECT 
+              h.dia AS Dia,
+              h.hora AS Hora,
+              m.nombre AS Modulo
+          FROM 
+              horarios h
+          JOIN 
+              modulos m ON m.id = h.modulo_id
+          WHERE 
+              m.nombre NOT IN ('Tutoria', 'Guardia') 
+              AND h.modulo_id IN (
+                  SELECT 
+                      m.id 
+                  FROM 
+                      modulos m
+                  WHERE 
+                      m.ciclo_id = (
+                          SELECT 
+                              ciclo_id 
+                          FROM 
+                              matriculaciones mat
+                          WHERE 
+                              alum_id = 3
+                      )
+                      AND m.curso = (
+                          SELECT 
+                              curso 
+                          FROM 
+                              matriculaciones mat
+                          WHERE 
+                              alum_id = ?
+                      )
+              )
+          GROUP BY 
+              h.dia, h.hora, m.nombre
+                  ORDER BY 
+                      CASE 
+                          WHEN h.dia = 'L/A' THEN 1
+                          WHEN h.dia = 'M/A' THEN 2
+                          WHEN h.dia = 'X' THEN 3
+                          WHEN h.dia = 'J/O' THEN 4
+                          WHEN h.dia = 'V/O' THEN 5
+                          ELSE 6
+                      END,
+                      h.hora;
+      `;
+      db.query(query, [estudianteId], (err, results) => {
+        if (err) {
+          console.error('Error al obtener los horarios del estudiante:', err);
+          return res.status(500).send('Error interno del servidor');
+        }
+        res.send(results);
+      });
+  } catch (error) {
+      console.error('Error al obtener los horarios del estudiante:', error);
+      res.status(500).json({ error: 'Error al obtener los horarios del estudiante' });
+  }
+});
+
+app.get('/reuniones/estudiante/:estudianteId', async (req, res) => {
+    try {
+        const estudianteId = req.params.estudianteId;
+        const query = `
+            SELECT 
+                r.id_reunion, 
+                r.titulo, 
+                r.asunto, 
+                r.aula, 
+                r.fecha, 
+                r.estado, 
+                p.nombre AS profesor_nombre, 
+                p.apellidos AS profesor_apellidos
+            FROM 
+                reuniones r 
+            JOIN 
+                users p ON r.profesor_id = p.id 
+            WHERE 
+                r.alumno_id = ?;
+        `;
+        db.query(query, [estudianteId], (err, results) => {
+            if(err){
+              console.error('Error al obtener las reuniones del estudiante:', err);
+              return res.status(500).send('Error interno del servidor');
+            }
+            console.log(results);
+          res.send(results)
+          });
+    } catch (error) {
+        console.error('Error al obtener las reuniones:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
+});
+
+app.get('/reuniones/profesor/:profesorId', async (req, res) => {
+    try {
+        const profesorId = req.params.profesorId;
+        const query = `
+            SELECT 
+                r.id_reunion, 
+                r.titulo, 
+                r.asunto, 
+                r.aula, 
+                r.fecha, 
+                r.estado, 
+                p.nombre AS alumno_nombre, 
+                p.apellidos AS alumno_apellidos
+            FROM 
+                reuniones r 
+            JOIN 
+                users p ON r.alumno_id = p.id 
+            WHERE 
+                r.profesor_id = ?;
+        `;
+        db.query(query, [profesorId], (err, results) => {
+            if(err){
+              console.error('Error al obtener las reuniones del estudiante:', err);
+              return res.status(500).send('Error interno del servidor');
+            }
+            console.log(results);
+          res.send(results)
+          });
+    } catch (error) {
+        console.error('Error al obtener las reuniones:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
+});
 
 app.post('/users', (req, res) => {
     const newItem = req.body;

@@ -1,13 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
-export interface Horario {
-  dia: string;
-  hora: string;
-  profe_id: number;
-  modulo_id: number;
-}
+import { MeetingStudent, MeetingTeacher } from '../interface/meeting';
+import { Horario, HorarioIkasle } from '../interface/timetable';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +20,18 @@ export class ApiService {
 
   getHorariosByProfeId(profeId: number): Observable<Horario[]> {
     return this.http.get<Horario[]>(`${this.baseUrl}/horarios?profe_id=${profeId}`);
+  }
+  getHorariosByStudentId(ikasleId: number): Observable<HorarioIkasle[]> {
+    return this.http.get<HorarioIkasle[]>(`${this.baseUrl}/horarios-estudiante?estudiante_id=${ikasleId}`);
+  }
+
+  getReunionesByProfesorId(profesorId: number): Observable<MeetingTeacher[]> {
+    return this.http.get<MeetingTeacher[]>(`${this.baseUrl}/reuniones/profesor/${profesorId}`);
+  }
+
+  getReunionesByAlumnoId(estudianteId: number): Observable<MeetingStudent[]> {
+    console.log('Fetching reuniones for estudianteId:', estudianteId);
+    return this.http.get<MeetingStudent[]>(`${this.baseUrl}/reuniones/estudiante/${estudianteId}`);
   }
   
   // USERS

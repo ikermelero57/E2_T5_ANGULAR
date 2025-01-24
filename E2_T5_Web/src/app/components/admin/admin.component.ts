@@ -3,7 +3,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ApiService, Horario } from 'app/services/bd.service';
+import { ApiService } from 'app/services/bd.service';
+import { MeetingTeacher } from '../../interface/meeting';
+import { Horario } from '../../interface/timetable';
 
 @Component({
   selector: 'app-admin',
@@ -17,8 +19,9 @@ export class AdminComponent implements OnInit {
   userImage: string = '';
   userId: number | null = null;
   horarios: Horario[] = [];
+  reuniones: MeetingTeacher[] = [];
   weekDays: string[] = ['L/A', 'M/A', 'X', 'J/O', 'V/O']; // Días de la semana
-  hours: number[] = [1, 2, 3, 4, 5, 6]; // Horas del día
+  hours: number[] = [1, 2, 3, 4, 5]; // Horas del día
   
 
   constructor(private apiService: ApiService) {}
@@ -34,9 +37,19 @@ export class AdminComponent implements OnInit {
         this.apiService.getHorariosByProfeId(this.userId).subscribe(
           (data: Horario[]) => {
             this.horarios = data;
+            console.log(data);
           },
           (error) => {
             console.error('Error al cargar los horarios:', error);
+          }
+        );
+        this.apiService.getReunionesByProfesorId(this.userId).subscribe(
+          (data: MeetingTeacher[]) => {
+            this.reuniones = data;
+            console.log(this.reuniones);
+          },
+          (error) => {
+            console.error('Error al cargar las reuniones:', error);
           }
         );
       }
