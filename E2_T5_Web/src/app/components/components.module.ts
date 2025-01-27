@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
 import { BasicelementsComponent } from './basicelements/basicelements.component';
 import { NavigationComponent } from './navigation/navigation.component';
 
-import { NucleoiconsComponent } from './nucleoicons/nucleoicons.component';
+//import { NucleoiconsComponent } from './nucleoicons/nucleoicons.component';
 import { ComponentsComponent } from './components.component';
 import { NotificationComponent } from './notification/notification.component';
 import { NgbdModalComponent } from './modal/modal.component';
@@ -35,7 +35,7 @@ import { SignupComponent } from './signup/signup.component';
         ComponentsComponent,
         BasicelementsComponent,
         NavigationComponent,
-        NucleoiconsComponent,
+        // NucleoiconsComponent,
         NotificationComponent,
         // SignupComponent,
         AdminComponent,
