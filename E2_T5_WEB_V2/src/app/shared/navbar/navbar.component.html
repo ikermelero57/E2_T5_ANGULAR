@@ -1,7 +1,7 @@
 <mat-toolbar color="primary" class="navbar navbar-expand-lg fixed-top bg-elorrieta">
   <mat-toolbar-row class="container-fluid d-flex justify-content-between align-items-center">
     <!-- Logo -->
-    <a class="navbar-brand">
+    <a [routerLink]="['/home']" class="navbar-brand">
       <img src="img/logo-elorrieta.png" alt="Logo" class="logo">
     </a>
 
@@ -14,19 +14,19 @@
     <div class="d-none d-lg-block">
       <ul class="navbar-nav ms-auto">
         <ng-container *ngIf="userAuth(); else notLoggedIn">
-          <li class="nav-item text-white" *ngIf="userRole === 1">
-            <a [routerLink]="['/home']" class="nav-link">God Panel</a>
+          <li class="nav-item" *ngIf="userRole === 1">
+            <a [routerLink]="['/home']" class="nav-link text-white">God Panel</a>
           </li>
-          <li class="nav-item text-white" *ngIf="userRole === 2">
-            <a [routerLink]="['/home']" class="nav-link">Admin Panel</a>
+          <li class="nav-item" *ngIf="userRole === 2">
+            <a [routerLink]="['/home']" class="nav-link text-white">Admin Panel</a>
           </li>
-          <li class="nav-item text-white" *ngIf="userRole === 3">
-            <a [routerLink]="['/home']" class="nav-link">Teacher Zone</a>
+          <li class="nav-item" *ngIf="userRole === 3">
+            <a [routerLink]="['/home']" class="nav-link text-white">Teacher Zone</a>
           </li>
-          <li class="nav-item text-white" *ngIf="userRole === 4">
-            <a [routerLink]="['/home']" class="nav-link">Student Zone</a>
+          <li class="nav-item" *ngIf="userRole === 4">
+            <a [routerLink]="['/home']" class="nav-link text-white">Student Zone</a>
           </li>
-          <li class="nav-item text-white">
+          <li class="nav-item">
             <button mat-raised-button color="warn" (click)="logout()">Cerrar Sesión</button>
           </li>
         </ng-container>

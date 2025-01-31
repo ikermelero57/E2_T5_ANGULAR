@@ -3,6 +3,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MeetingStudent, MeetingTeacher } from '../interface/meeting';
 import { Horario, HorarioIkasle } from '../interface/timetable';
+// import { environment } from '../../environments/environment.development';
+// import { environmentIkas } from '../../environments/environment';
+import { Ikastetxeak } from '../interface/school';
+// environment
+// environmentIkas
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +22,13 @@ export class ApiService {
     const loginData = { email, password };
     return this.http.post(`${this.baseUrl}/users/login`, { email, password });
   }
+
+  // getSchoolsById():Observable<Ikastetxeak>{
+  //   return this.http.get<Ikastetxeak[]>(``);
+  // }
+  // getAllSchools():Observable<Ikastetxeak>{
+  //   return this.http.get<Ikastetxeak[]>(``);
+
 
   getHorariosByProfeId(profeId: number): Observable<Horario[]> {
     return this.http.get<Horario[]>(`${this.baseUrl}/horarios?profe_id=${profeId}`);
