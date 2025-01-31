@@ -1,0 +1,107 @@
+<div class="wrapper pt-5">
+  <div class="section profile-content">
+    <div class="container">
+      <!-- Perfil de Usuario -->
+      <div class="owner text-center">
+
+            <div class="avatar">
+              <img [src]="userImage || './img/default-user.png'" alt="Profile Image" class="img-circle img-responsive" style="border-radius:580px">
+            </div>
+            <h2 class="title">{{ userName }} {{ userSurname }}</h2>
+            <h6 class="description">Irakasle</h6>
+
+      </div>
+
+      <div class="text-center mt-4">
+        <p>Explora y gestiona tus horarios y reuniones, y busca estudiantes según su nombre o email.</p>
+      </div>
+      <mat-card class="mt-4">
+        <mat-card-content>
+          <mat-tab-group >
+            <!-- Tab para Horarios -->
+            <!-- Tab para Horarios -->
+            <mat-tab label="Horario">
+              <div class="following" id="follows">
+                <h4 class="mb-3 mt-4">Horarios</h4>
+                <table class="table table-bordered table-striped table-hover text-center">
+                  <thead class="table-light">
+                    <tr>
+                      <th class="align-middle" style="width:10%;">Hora</th>
+                      <th *ngFor="let day of weekDays" class="align-middle" style="width:15%;">{{ day }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let hour of hours">
+                      <td class="align-middle">{{ hour }}</td>
+                      <td *ngFor="let day of weekDays" style="word-wrap: break-word;white-space: normal;">
+                        <div *ngFor="let horario of getHorariosForDayAndHour(day, hour)" style="word-wrap: break-word;white-space: normal;">
+                          <span style="word-wrap: break-word;white-space: normal;" class="badge text-dark"><strong>{{ horario.modulo }}</strong></span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </mat-tab>
+            <mat-tab label="Reuniones">
+              <div class="d-flex flex-column following" id="follows">
+                <h4 class=" mb-3 mt-4">Reuniones</h4>
+                <table *ngIf="reuniones && reuniones.length > 0; else noReuniones" class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Título</th>
+                      <th>Asunto</th>
+                      <th>Aula</th>
+                      <th>Fecha</th>
+                      <th>Estado</th>
+                      <th>Profesor</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let reunion of reuniones">
+                      <td>{{ reunion.titulo }}</td>
+                      <td>{{ reunion.asunto }}</td>
+                      <td>{{ reunion.aula }}</td>
+                      <td>{{ reunion.fecha | date : "dd/MM/yyyy HH:mm" }}</td>
+                      <td>{{ reunion.estado | titlecase }}</td>
+                      <td>
+                        {{ reunion.alumno_nombre }}
+                        {{ reunion.alumno_apellidos }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <ng-template #noReuniones>
+                  <p>No tienes reuniones.</p>
+                </ng-template>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+
+      <!-- Buscar Estudiantes -->
+      <h4 class="mt-5">Buscar Alumnos</h4>
+      <mat-form-field class="full-width">
+        <mat-label>Buscar estudiante</mat-label>
+        <input matInput [(ngModel)]="searchTerm" placeholder="Nombre o email" (input)="filterStudents()">
+      </mat-form-field>
+      <button mat-raised-button color="accent" (click)="fetchStudents()">Cargar Estudiantes</button>
+
+      <!-- Tabla de estudiantes filtrados -->
+      <table mat-table [dataSource]="filteredStudents" class="mat-elevation-z8 mb-5" *ngIf="filteredStudents.length > 0">
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef> Nombre </th>
+          <td mat-cell *matCellDef="let student"> {{ student.nombre }} </td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> Email </th>
+          <td mat-cell *matCellDef="let student"> {{ student.email }} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="['nombre', 'email']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['nombre', 'email']"></tr>
+      </table>
+      <p *ngIf="filteredStudents.length === 0">No se encontraron estudiantes.</p>
+    </div>
+  </div>
+</div>

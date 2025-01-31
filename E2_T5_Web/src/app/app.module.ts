@@ -10,8 +10,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 
 import { ComponentsModule } from './components/components.module';
-import { HttpClientModule } from '@angular/common/http';
-import { ApiService } from './services/bd.service';
+import { ExamplesModule } from './examples/examples.module';
 
 
 @NgModule({
@@ -26,10 +25,10 @@ import { ApiService } from './services/bd.service';
     FormsModule,
     RouterModule,
     ComponentsModule,
+    ExamplesModule,
     AppRoutingModule,
-    HttpClientModule
   ],
-  providers: [ApiService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

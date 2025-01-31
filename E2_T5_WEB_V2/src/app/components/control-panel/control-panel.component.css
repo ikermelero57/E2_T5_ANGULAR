@@ -1,0 +1,23 @@
+.bg-home{
+  background-image: url('../../../../public/img/armiarma-bg.jpg');
+  background-size: cover; /* Ajusta la imagen para cubrir toda la pantalla */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita la repetición */
+  /* background-attachment: fixed; Hace que el fondo se mantenga fijo al hacer scroll */
+  width: 100%;
+  height: 40vh;
+}
+.bg-elorrieta{
+  background: linear-gradient(90deg, rgba(35,164,212,1) 0%, rgba(0,137,159,1) 32%, rgba(9,9,121,1) 100%);
+}
+.w-15{
+  width: 15%;
+  height: 200px;
+  color: #fff;
+}
+
+.big-number{
+  font-size: 30px;
+}
+
+

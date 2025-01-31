@@ -12,9 +12,6 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 })
 
 export class ComponentsComponent implements OnInit {
-    userName: string = '';
-    userSurname: string = '';
-    userRole: number | null = null;
     page = 4;
     page1 = 5;
     focus;
@@ -42,17 +39,6 @@ export class ComponentsComponent implements OnInit {
             input_group[i].children[0].addEventListener('blur', function (){
                 input_group[i].classList.remove('input-group-focus');
             });
-        }
-
-
-        const user = localStorage.getItem('user');
-        if (user) {
-            const userData = JSON.parse(user);
-            this.userName = userData.nombre; // Ajusta según el campo del nombre
-            this.userSurname = userData.apellidos;
-            this.userRole = userData.tipo_id; // Ajustar al campo correcto
-        } else {
-            this.userName = 'Usuario Invitado'; // Fallback si no hay usuario
         }
     }
 

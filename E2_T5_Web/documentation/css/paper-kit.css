@@ -4349,10 +4349,6 @@ textarea.form-control {
     font-size: 5em;
   }
 
-  .presentation-title2 {
-    font-size: 4em;
-  }
-
   .presentation-subtitle {
     margin-top: 40px;
   }
@@ -5875,7 +5871,7 @@ textarea.form-control {
 .owner .avatar {
   padding: 15px;
   max-width: 180px;
-  margin: 85px auto 0;
+  margin: -85px auto 0;
   display: inline-block;
 }
 

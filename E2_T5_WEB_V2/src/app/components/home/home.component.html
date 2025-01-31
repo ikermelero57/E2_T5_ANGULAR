@@ -1,0 +1,36 @@
+<mat-card class="welcome-card bg-home d-flex justify-content-center align-items-center">
+  <div class="bg-home-card">
+    <mat-card-header class="flex-column">
+      <p class=" display-1 text-white text-center "><strong>Ongi Etorri</strong></p>
+      <p class="text-white display-2 text-center"><strong>{{ userName }} {{ userSurname }}</strong></p>
+    </mat-card-header>
+    <mat-card-content >
+      <div class="logo-container text-center">
+        <img src="img/logo-elorrieta.png" alt="Logo" class="logo" style="width:110px;" />
+      </div>
+      <div>
+        <div class="overlay"></div>
+      </div>
+    </mat-card-content>
+  </div>
+</mat-card>
+
+<div class="main-content">
+  <ng-container *ngIf="userRole === 1">
+    <app-god></app-god>
+  </ng-container>
+  <ng-container *ngIf="userRole === 2">
+    <app-admin></app-admin>
+  </ng-container>
+  <ng-container *ngIf="userRole === 3">
+    <app-teacher></app-teacher>
+  </ng-container>
+  <ng-container *ngIf="userRole === 4">
+    <app-student></app-student>
+  </ng-container>
+  <ng-container *ngIf="!userRole">
+    <p class="text-center">
+      No hay usuario logueado. Por favor, inicia sesión.
+    </p>
+  </ng-container>
+</div>

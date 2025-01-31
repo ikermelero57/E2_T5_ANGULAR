@@ -1,0 +1,78 @@
+<mat-toolbar color="primary" class="navbar navbar-expand-lg fixed-top bg-elorrieta">
+  <mat-toolbar-row class="container-fluid d-flex justify-content-between align-items-center">
+    <!-- Logo -->
+    <a class="navbar-brand">
+      <img src="img/logo-elorrieta.png" alt="Logo" class="logo">
+    </a>
+
+    <!-- Botón hamburguesa -->
+    <button mat-icon-button class="navbar-toggler" (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <!-- Menú de navegación para pantallas grandes -->
+    <div class="d-none d-lg-block">
+      <ul class="navbar-nav ms-auto">
+        <ng-container *ngIf="userAuth(); else notLoggedIn">
+          <li class="nav-item text-white" *ngIf="userRole === 1">
+            <a [routerLink]="['/home']" class="nav-link">God Panel</a>
+          </li>
+          <li class="nav-item text-white" *ngIf="userRole === 2">
+            <a [routerLink]="['/home']" class="nav-link">Admin Panel</a>
+          </li>
+          <li class="nav-item text-white" *ngIf="userRole === 3">
+            <a [routerLink]="['/home']" class="nav-link">Teacher Zone</a>
+          </li>
+          <li class="nav-item text-white" *ngIf="userRole === 4">
+            <a [routerLink]="['/home']" class="nav-link">Student Zone</a>
+          </li>
+          <li class="nav-item text-white">
+            <button mat-raised-button color="warn" (click)="logout()">Cerrar Sesión</button>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<!-- Enlace para usuarios no autenticados -->
+<ng-template #notLoggedIn>
+  <li class="nav-item">
+    <a [routerLink]="['/signup']" class="nav-link text-white">Iniciar Sesión</a>
+  </li>
+</ng-template>
+
+<!-- Sidenav para pantallas pequeñas -->
+<mat-drawer-container class="drawer-container">
+  <mat-drawer #drawer mode="side" position="start" class="app-sidenav" style="position: fixed;">
+    <mat-nav-list  style="padding-top: 6em;padding-left: 1em;">
+      <ng-container *ngIf="userAuth(); else notLoggedIn">
+        <li mat-list-item *ngIf="userRole === 1">
+          <a [routerLink]="['/home']" class="nav-link">God Panel</a>
+        </li>
+        <li mat-list-item *ngIf="userRole === 2">
+          <a [routerLink]="['/home']" class="nav-link">Admin Panel</a>
+        </li>
+        <li mat-list-item *ngIf="userRole === 3">
+          <a [routerLink]="['/home']" class="nav-link">Teacher Zone</a>
+        </li>
+        <li mat-list-item *ngIf="userRole === 4">
+          <a [routerLink]="['/home']" class="nav-link">Student Zone</a>
+        </li>
+        <li mat-list-item>
+          <button mat-raised-button color="warn" (click)="logout()">Cerrar Sesión</button>
+        </li>
+      </ng-container>
+      <ng-template #notLoggedIn>
+        <li mat-list-item>
+          <a [routerLink]="['/signup']" class="nav-link">Iniciar Sesión</a>
+        </li>
+      </ng-template>
+    </mat-nav-list>
+  </mat-drawer>
+
+  <!-- Contenido principal -->
+  <mat-drawer-content>
+    <router-outlet></router-outlet> <!-- Aquí va el contenido de la aplicación -->
+  </mat-drawer-content>
+</mat-drawer-container>

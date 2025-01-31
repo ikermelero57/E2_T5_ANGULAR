@@ -1,0 +1,98 @@
+<mat-card class="welcome-card bg-home d-flex justify-content-center align-items-center">
+  <div class="bg-home-card">
+    <mat-card-header class="flex-column">
+      <p class=" display-1 text-white text-center "><strong>CONTROL PANEL</strong></p>
+    </mat-card-header>
+    <mat-card-content >
+      <div class="logo-container text-center">
+        <img src="img/logo-elorrieta.png" alt="Logo" class="logo" style="width:110px;" />
+      </div>
+      <div>
+        <div class="overlay"></div>
+      </div>
+    </mat-card-content>
+  </div>
+</mat-card>
+
+<div class="mt-5 mb-5">
+    <h1 class="text-center">NUMERO DE USUARIOS</h1>
+    <div class="d-flex justify-content-around mt-5">
+
+        <mat-card class="stats-card w-15 bg-elorrieta text-center justify-content-center">
+          <div class="card-header">
+            <div class="card-title">God</div>
+          </div>
+          <div class="card-content">
+            <div class="big-number">
+              {{ usersCount[1] || 0 }} <!-- Muestra el número de usuarios de tipo 1 -->
+            </div>
+          </div>
+        </mat-card>
+
+        <mat-card class="stats-card w-15 bg-elorrieta text-center justify-content-center">
+          <div class="card-header">
+            <div class="card-title">Administradores</div>
+          </div>
+          <div class="card-content">
+            <div class="big-number">
+              {{ usersCount[2] || 0 }} <!-- Muestra el número de usuarios de tipo 2 -->
+            </div>
+          </div>
+        </mat-card>
+
+        <mat-card class="stats-card w-15 bg-elorrieta text-center justify-content-center">
+          <div class="card-header">
+            <div class="card-title">Profesores</div>
+          </div>
+          <div class="card-content">
+            <div class="big-number">
+              {{ usersCount[3] || 0 }} <!-- Muestra el número de usuarios de tipo 3 -->
+            </div>
+          </div>
+        </mat-card>
+
+        <mat-card class="stats-card w-15 bg-elorrieta text-center justify-content-center">
+          <div class="card-header">
+            <div class="card-title">Estudiantes</div>
+          </div>
+          <div class="card-content">
+            <div class="big-number">
+              {{ usersCount[4] || 0 }} <!-- Muestra el número de usuarios de tipo 3 -->
+            </div>
+          </div>
+        </mat-card>
+
+        <mat-card class="stats-card w-15 bg-elorrieta text-center justify-content-center">
+          <div class="card-header">
+            <div class="card-title">Reuniones de Hoy</div>
+          </div>
+          <div class="card-content">
+            <div class="big-number">
+              {{ todayMeetingsCount }} <!-- Muestra el número de reuniones de hoy -->
+            </div>
+
+          </div>
+        </mat-card>
+    </div>
+</div>
+<hr class="w-75">
+<!-- 4 cartas CON LOS primeros USUARIOS -->
+<h1 class="text-center">USUARIOS</h1>
+<div class="d-flex justify-content-around mt-5 mb-5">
+  <!-- Recorremos los primeros 4 usuarios y mostramos una carta para cada uno -->
+  <mat-card *ngFor="let user of firstFourUsers" class="stats-card w-15  text-center justify-content-center">
+    <div class="card-header">
+      <div class="">
+        <img [src]="user.argazkia || './img/default-user.png'" alt="Profile Image" class="" style="width:50%;border-radius:580px">
+      </div>
+      <div class="card-title text-dark">{{ user.nombre }}</div> <!-- Mostramos el nombre del usuario -->
+    </div>
+    <div class="card-content">
+      <div class="">
+        {{ user.tipo_id }} <!-- Mostramos el tipo de usuario -->
+      </div>
+    </div>
+  </mat-card>
+</div>
+
+<!-- TABLA CON REUNIONES -->
