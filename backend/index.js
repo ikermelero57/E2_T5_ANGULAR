@@ -11,12 +11,21 @@ app.use(bodyParser.json());
 
 
 // MySQL datu-baserako konexioa sortu
+// const db = mysql.createConnection({
+//     host: '10.5.104.21', // MySQL zerbitzariaren helbidea
+//     user: 'iker', // MySQL erabiltzailea
+//     password: '', // MySQL pasahitza
+//     database: 'calendar', // Datu-basearen izena
+//     port: '3307' , // Portua 
+// });
+
+
 const db = mysql.createConnection({
-    host: '10.5.104.21', // MySQL zerbitzariaren helbidea
-    user: 'iker', // MySQL erabiltzailea
-    password: '', // MySQL pasahitza
+    host: 'localhost', // MySQL zerbitzariaren helbidea
+    user: 'root', // MySQL erabiltzailea
+    password: 'root', // MySQL pasahitza
     database: 'calendar', // Datu-basearen izena
-    port: '3307' , // Portua 
+    port: '3306' , // Portua 
 });
 
 
@@ -191,6 +200,10 @@ app.get('/reuniones/profesor/:profesorId', async (req, res) => {
     }
 });
 
+
+app.get('/users'),
+
+
 app.post('/users', (req, res) => {
     const newItem = req.body;
     const query = 'INSERT INTO users SET ?';
@@ -200,8 +213,26 @@ app.post('/users', (req, res) => {
     });
 });
 
+app.get('/users/:id', (req, res) => {
+    const userId = req.params.id; // Obtén el ID del usuario desde los parámetros de la URL
+    const query = 'SELECT * FROM users WHERE id = ?'; // Consulta SQL para obtener un usuario por su ID
 
-app.put('/users/:id', (req, res) => {
+    db.query(query, [userId], (err, results) => {
+        if (err) {
+            console.error('Error al obtener el usuario:', err);
+            return res.status(500).json({ error: 'Error interno del servidor' });
+        }
+
+        if (results.length === 0) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
+        }
+
+        res.send(results[0]); // Devuelve el primer resultado (el usuario encontrado)
+    });
+});
+
+
+app.put('/users/edit/:id', (req, res) => {
     const { id } = req.params;
     const updatedItem = req.body;
     const query = 'UPDATE users SET ? WHERE id = ?';

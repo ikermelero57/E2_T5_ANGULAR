@@ -1,15 +1,27 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../services/bd.service';
-import { MatCardModule } from '@angular/material/card';
-import { MatIcon } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-
+import { School } from '../../interface/school';
+import { Router } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { DetailsSchoolComponent } from './school-list/details-school/details-school.component';
+import { DetailsUserComponent } from './user-list/details-user/details-user.component';
 
 
 @Component({
   selector: 'app-control-panel',
   standalone:true,
-  imports: [MatCardModule,CommonModule],
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatDividerModule,
+    CommonModule,DetailsSchoolComponent, DetailsUserComponent],
   templateUrl: './control-panel.component.html',
   styleUrl: './control-panel.component.css'
 })
@@ -17,21 +29,15 @@ export class ControlPanelComponent {
   usersCount: { [key: number]: number } = {};
   todayMeetingsCount: number = 0;
   firstFourUsers: any[] = [];
+  firstFourSchools: School[] = [];
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit() {
     this.loadUsersCount();
     this.loadFirstFourUsers();
     //this.loadTodayMeetingsCount();
-  }
-
-  loadFirstFourUsers() {
-    this.apiService.getUsers().subscribe((users: any[]) => {
-      // Obtén los primeros 4 usuarios
-      this.firstFourUsers = users.slice(0, 4);
-      console.log(this.firstFourUsers);
-    });
+    this.loadFirstFourSchools();
   }
 
   loadUsersCount() {
@@ -44,10 +50,43 @@ export class ControlPanelComponent {
     });
   }
 
+  loadFirstFourUsers() {
+    this.apiService.getUsers().subscribe((users: any[]) => {
+      // Obtén los primeros 4 usuarios
+      this.firstFourUsers = users.slice(0, 4);
+      console.log(this.firstFourUsers);
+    });
+  }
 
-  // loadTodayMeetingsCount() {
+  loadFirstFourSchools() {
+    this.apiService.getSchools().subscribe((schools: School[]) => {
+      this.firstFourSchools = schools.slice(0, 4); // Usa la variable correcta y el nombre
+      console.log('Escuelas:', this.firstFourSchools);
+    });
+  }
+
+// loadTodayMeetingsCount() {
   //   this.apiService.getTodayMeetingsCount().subscribe(count => {
   //     this.todayMeetingsCount = count;
   //   });
   // }
+
+  viewUserDetails(user: any) {
+    this.router.navigate(['/panel-control/user', user.id]); // Redirige a la ruta anidada
+  }
+
+  // Método para manejar el botón "Ver más" de escuelas
+  viewSchoolDetails(school: School) {
+    this.router.navigate(['/panel-control/school', school.CCEN]); // Redirige a la ruta anidada
+  }
+
+  viewUserList() {
+    this.router.navigate(['/panel-control/users']); // Redirige a la ruta anidada
+  }
+
+  // Método para manejar el botón "Ver más" de escuelas
+  viewSchoolsList() {
+    this.router.navigate(['/panel-control/schools']); // Redirige a la ruta anidada
+  }
+
 }
