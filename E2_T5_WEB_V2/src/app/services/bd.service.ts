@@ -56,11 +56,15 @@ export class ApiService {
     return this.http.post(`${environment.baseUrl}/users`, data);
   }
 
-  updateUser(id: number, data: any) {
-    return this.http.put(`${environment.baseUrl}/users/${id}`, data);
+  updateUser(id: number, data: any): Observable<any> {
+    return this.http.put(`${environment.baseUrl}/users/update/${id}`, data);
   }
 
-  deleteUser(id: number) {
-    return this.http.delete(`${environment.baseUrl}/users/${id}`);
+  deleteUser(id: number): Observable<any> {
+    return this.http.delete(`${environment.baseUrl}/users/delete/${id}`);
+  }
+
+  createUser(data: any): Observable<any> {
+    return this.http.post(`${environment.baseUrl}/users/create`, data);
   }
 }

@@ -8,8 +8,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
-import { DetailsSchoolComponent } from './school-list/details-school/details-school.component';
-import { DetailsUserComponent } from './user-list/details-user/details-user.component';
 
 
 @Component({
@@ -21,7 +19,7 @@ import { DetailsUserComponent } from './user-list/details-user/details-user.comp
     MatToolbarModule,
     MatIconModule,
     MatDividerModule,
-    CommonModule,DetailsSchoolComponent, DetailsUserComponent],
+    CommonModule],
   templateUrl: './control-panel.component.html',
   styleUrl: './control-panel.component.css'
 })
@@ -72,21 +70,21 @@ export class ControlPanelComponent {
   // }
 
   viewUserDetails(user: any) {
-    this.router.navigate(['/panel-control/user', user.id]); // Redirige a la ruta anidada
+    this.router.navigate(['/user', user.id]); // Redirige a la ruta anidada
   }
 
   // Método para manejar el botón "Ver más" de escuelas
   viewSchoolDetails(school: School) {
-    this.router.navigate(['/panel-control/school', school.CCEN]); // Redirige a la ruta anidada
+    this.router.navigate(['/school', school.CCEN]); // Redirige a la ruta anidada
   }
 
   viewUserList() {
-    this.router.navigate(['/panel-control/users']); // Redirige a la ruta anidada
+    this.router.navigate(['/users']); // Redirige a la ruta anidada
   }
 
   // Método para manejar el botón "Ver más" de escuelas
   viewSchoolsList() {
-    this.router.navigate(['/panel-control/schools']); // Redirige a la ruta anidada
+    this.router.navigate(['/schools']); // Redirige a la ruta anidada
   }
 
 }

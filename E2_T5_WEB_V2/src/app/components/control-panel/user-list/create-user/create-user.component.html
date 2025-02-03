@@ -1,1 +1,102 @@
 <p>create-user works!</p>
+<mat-card class="create-card shadow-sm">
+  <mat-card-header>
+    <mat-card-title>Crear Usuario</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <!-- Campos del formulario -->
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" required />
+        <mat-error *ngIf="userForm.get('email')?.invalid">
+          Introduce un email válido.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Nombre de usuario</mat-label>
+        <input matInput formControlName="username" required />
+        <mat-error *ngIf="userForm.get('username')?.invalid">
+          Este campo es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" formControlName="password" required />
+        <mat-error *ngIf="userForm.get('password')?.invalid">
+          Este campo es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" required />
+        <mat-error *ngIf="userForm.get('nombre')?.invalid">
+          Este campo es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Apellidos</mat-label>
+        <input matInput formControlName="apellidos" required />
+        <mat-error *ngIf="userForm.get('apellidos')?.invalid">
+          Este campo es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>DNI</mat-label>
+        <input matInput formControlName="dni" required />
+        <mat-error *ngIf="userForm.get('dni')?.invalid">
+          Este campo es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Dirección</mat-label>
+        <input matInput formControlName="direccion" required />
+        <mat-error *ngIf="userForm.get('direccion')?.invalid">
+          Este campo es obligatorio.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Teléfono 1</mat-label>
+        <input matInput type="number" formControlName="telefono1" required />
+        <mat-error *ngIf="userForm.get('telefono1')?.invalid">
+          Introduce un número válido.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Teléfono 2</mat-label>
+        <input matInput type="number" formControlName="telefono2" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Tipo de Usuario</mat-label>
+        <mat-select formControlName="tipo_id" required>
+          <mat-option [value]="1">God</mat-option>
+          <mat-option [value]="2">Admin</mat-option>
+          <mat-option [value]="3">Profesor</mat-option>
+          <mat-option [value]="4">Usuario</mat-option>
+        </mat-select>
+        <mat-error *ngIf="userForm.get('tipo_id')?.invalid">
+          Selecciona un tipo de usuario.
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Botones -->
+      <div class="d-flex justify-content-end mt-3">
+        <button mat-raised-button color="primary" type="submit">
+          Crear Usuario
+        </button>
+        <button mat-raised-button color="warn" type="button" (click)="goBack()" class="ms-2">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

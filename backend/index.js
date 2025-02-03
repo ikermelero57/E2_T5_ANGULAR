@@ -200,18 +200,37 @@ app.get('/reuniones/profesor/:profesorId', async (req, res) => {
     }
 });
 
-
-app.get('/users'),
-
-
-app.post('/users', (req, res) => {
-    const newItem = req.body;
-    const query = 'INSERT INTO users SET ?';
-    db.query(query, newItem, (err, results) => {
-        if (err) throw err;
-        res.send({ id: results.insertId, ...newItem });
+app.post('/users/create', (req, res) => {
+    const newUser = req.body;
+  
+    const query = `
+      INSERT INTO users 
+      (id,email, username, password, nombre, apellidos, dni, direccion, telefono1, telefono2, tipo_id) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+  
+    const values = [
+      newUser.id,
+      newUser.email,
+      newUser.username,
+      newUser.password,
+      newUser.nombre,
+      newUser.apellidos,
+      newUser.dni,
+      newUser.direccion,
+      newUser.telefono1,
+      newUser.telefono2,
+      newUser.tipo_id,
+    ];
+  
+    db.query(query, values, (err, results) => {
+      if (err) {
+        console.error('Error al crear el usuario:', err);
+        return res.status(500).json({ error: 'Error interno del servidor' });
+      }
+      res.json({ message: 'Usuario creado correctamente', id: results.insertId });
     });
-});
+  });
 
 app.get('/users/:id', (req, res) => {
     const userId = req.params.id; // Obtén el ID del usuario desde los parámetros de la URL
@@ -232,18 +251,51 @@ app.get('/users/:id', (req, res) => {
 });
 
 
-app.put('/users/edit/:id', (req, res) => {
-    const { id } = req.params;
-    const updatedItem = req.body;
-    const query = 'UPDATE users SET ? WHERE id = ?';
-    db.query(query, [updatedItem, id], (err, results) => {
-        if (err) throw err;
-        res.send(results);
+app.put('/users/update/:id', (req, res) => {
+    const userId = req.params.id;
+    const updatedUser = req.body;
+  
+    const query = `
+      UPDATE users 
+      SET 
+        email = ?, 
+        username = ?, 
+        password = ?, 
+        nombre = ?, 
+        apellidos = ?, 
+        dni = ?, 
+        direccion = ?, 
+        telefono1 = ?, 
+        telefono2 = ?, 
+        tipo_id = ? 
+      WHERE id = ?
+    `;
+  
+    const values = [
+      updatedUser.email,
+      updatedUser.username,
+      updatedUser.password,
+      updatedUser.nombre,
+      updatedUser.apellidos,
+      updatedUser.dni,
+      updatedUser.direccion,
+      updatedUser.telefono1,
+      updatedUser.telefono2,
+      updatedUser.tipo_id,
+      userId,
+    ];
+  
+    db.query(query, values, (err, results) => {
+      if (err) {
+        console.error('Error al actualizar el usuario:', err);
+        return res.status(500).json({ error: 'Error interno del servidor' });
+      }
+      res.json({ message: 'Usuario actualizado correctamente' });
     });
-});
+  });
 
 
-app.delete('/users/:id', (req, res) => {
+app.delete('/users/delete/:id', (req, res) => {
     const { id } = req.params;
     const query = 'DELETE FROM users WHERE id = ?';
     db.query(query, [id], (err, results) => {

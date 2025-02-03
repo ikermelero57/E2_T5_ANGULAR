@@ -15,11 +15,11 @@ export class DetailsSchoolComponent {
   constructor(private route: ActivatedRoute, private apiService: ApiService) {}
 
   ngOnInit() {
-    const schoolId = this.route.snapshot.paramMap.get('id'); // Obtén el ID de la ruta
-    if (schoolId) {
-      this.apiService.getSchoolById(+schoolId).subscribe((school) => {
-        this.school = school;
-      });
-    }
+    // const schoolId = this.route.snapshot.paramMap.get('id'); // Obtén el ID de la ruta
+    // if (schoolId) {
+    //   this.apiService.getSchoolById(+schoolId).subscribe((school) => {
+    //     this.school = school;
+    //   });
+    // }
   }
 }
