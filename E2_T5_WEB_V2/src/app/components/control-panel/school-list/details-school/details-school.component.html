@@ -1,1 +1,50 @@
-<p>details-school works!</p>
+<div class="container mt-4" *ngIf="ikastetxe">
+  <h2>{{ ikastetxe.NOM }}</h2>
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <th>Nombre</th>
+        <td>{{ ikastetxe.NOM }}</td>
+      </tr>
+      <tr>
+        <th>Nombre en euskera</th>
+        <td>{{ ikastetxe.NOME }}</td>
+      </tr>
+      <tr>
+        <th>Dirección</th>
+        <td>{{ ikastetxe.DOMI }}</td>
+      </tr>
+      <tr>
+        <th>Código postal</th>
+        <td>{{ ikastetxe.CPOS }}</td>
+      </tr>
+      <tr>
+        <th>Teléfono</th>
+        <td>{{ ikastetxe.TEL1 }}</td>
+      </tr>
+      <tr>
+        <th>Fax</th>
+        <td>{{ ikastetxe.TFAX }}</td>
+      </tr>
+      <tr>
+        <th>Email</th>
+        <td>{{ ikastetxe.EMAIL }}</td>
+      </tr>
+      <tr>
+        <th>Página web</th>
+        <td><a [href]="ikastetxe.PAGINA" target="_blank">{{ ikastetxe.PAGINA }}</a></td>
+      </tr>
+      <tr>
+        <th>Municipio</th>
+        <td>{{ ikastetxe.DMUNIC }}</td>
+      </tr>
+      <tr>
+        <th>Provincia</th>
+        <td>{{ ikastetxe.DTERRC }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="mt-4">Ubicación</h3>
+  <div id="map" class="map-container"></div>
+</div>
