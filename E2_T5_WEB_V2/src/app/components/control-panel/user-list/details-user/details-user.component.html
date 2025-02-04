@@ -1,0 +1,46 @@
+<mat-card class="details-card h-100 w-100 shadow-sm">
+  <mat-card-header class="bg-dark text-white">
+    <mat-card-title>Detalles del Usuario</mat-card-title>
+    <mat-card-subtitle class="text-white">Información completa del usuario</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="p-4">
+    <div class="row">
+      <div class="col-md-3 text-center">
+        <img [src]="user.argazkia || './img/default-user.png'" alt="Profile Image" class="profile-image img-fluid rounded-circle shadow" />
+      </div>
+      <div class="col-md-9">
+        <mat-list>
+          <mat-list-item>
+            <span matLine><strong>Nombre:</strong></span>
+            <span matLine>{{ user.nombre }}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <span matLine><strong>Email:</strong></span>
+            <span matLine>{{ user.email }}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <span matLine><strong>Teléfono:</strong></span>
+            <span matLine>{{ user.telefono1 }}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <span matLine><strong>Dirección:</strong></span>
+            <span matLine>{{ user.direccion }}</span>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <mat-list-item>
+            <span matLine><strong>Tipo de Usuario:</strong></span>
+            <span matLine>{{ getTypeName(user.tipo_id) }}</span>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions class="p-3">
+    <button mat-raised-button class="bg-warning" (click)="editUser()">Editar</button>
+    <button mat-raised-button class="bg-danger" (click)="deleteUser()">Eliminar</button>
+    <button mat-raised-button class="bg-primary" (click)="goBack()">Volver</button>
+  </mat-card-actions>
+</mat-card>

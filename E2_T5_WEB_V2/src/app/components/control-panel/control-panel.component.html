@@ -1,7 +1,7 @@
 <mat-card class="welcome-card bg-home d-flex justify-content-center align-items-center">
   <div class="bg-home-card">
     <mat-card-header class="flex-column">
-      <p class=" display-1 text-white text-center "><strong>CONTROL PANEL</strong></p>
+      <p class=" display-1 text-white text-center title-shadow"><strong>CONTROL PANEL</strong></p>
     </mat-card-header>
     <mat-card-content >
       <div class="logo-container text-center">
@@ -13,14 +13,14 @@
     </mat-card-content>
   </div>
 </mat-card>
-<div class="container">
+<div class="container mb-5"><div class="container">
 <div class="mt-5 mb-5">
     <h1 class="text-center">NUMERO DE USUARIOS</h1>
     <div class="d-flex justify-content-around mt-5">
 
         <mat-card class="stats-card w-15 bg-elorrieta text-center justify-content-center">
           <div class="card-header">
-            <div class="card-title">God</div>
+            <div class="card-title title-shadow">God</div>
           </div>
           <div class="card-content">
             <div class="big-number">
@@ -31,7 +31,7 @@
 
         <mat-card class="stats-card w-15 bg-elorrieta text-center justify-content-center">
           <div class="card-header">
-            <div class="card-title">Administradores</div>
+            <div class="card-title title-shadow">Administradores</div>
           </div>
           <div class="card-content">
             <div class="big-number">
@@ -42,7 +42,7 @@
 
         <mat-card class="stats-card w-15 bg-elorrieta text-center justify-content-center">
           <div class="card-header">
-            <div class="card-title">Profesores</div>
+            <div class="card-title title-shadow">Profesores</div>
           </div>
           <div class="card-content">
             <div class="big-number">
@@ -53,7 +53,7 @@
 
         <mat-card class="stats-card w-15 bg-elorrieta text-center justify-content-center">
           <div class="card-header">
-            <div class="card-title">Estudiantes</div>
+            <div class="card-title title-shadow">Estudiantes</div>
           </div>
           <div class="card-content">
             <div class="big-number">
@@ -64,7 +64,7 @@
 
         <mat-card class="stats-card w-15 bg-elorrieta text-center justify-content-center">
           <div class="card-header">
-            <div class="card-title">Reuniones de Hoy</div>
+            <div class="card-title title-shadow">Reuniones de Hoy</div>
           </div>
           <div class="card-content">
             <div class="big-number">
@@ -75,10 +75,10 @@
         </mat-card>
     </div>
 </div>
-<hr class="w-75">
+<hr class="w-100">
 <!-- 4 cartas CON LOS primeros USUARIOS -->
 <h1 class="text-center">USUARIOS</h1>
-<div class="d-flex justify-content-around mt-5 mb-5">
+<div class="d-flex justify-content-around mt-5 mb-5 ">
   <!-- Recorremos los primeros 4 usuarios y mostramos una carta para cada uno -->
   <mat-card *ngFor="let user of firstFourUsers" class="stats-card w-15  text-center justify-content-center">
     <div class="card-header">
@@ -88,20 +88,46 @@
       <div class="card-title text-dark">{{ user.nombre }}</div> <!-- Mostramos el nombre del usuario -->
     </div>
     <div class="card-content">
-      <div class="">
+      <div class="text-dark">
         {{ user.tipo_id }} <!-- Mostramos el tipo de usuario -->
+
       </div>
-      <div class="">
-        {{ user.email }} <!-- Mostramos el tipo de usuario -->
-      </div>
+      <button mat-button color="primary" (click)="viewUserDetails(user)">Ver más</button>
+      <!-- (click)="viewUserDetails(user)" -->
     </div>
       <mat-card-footer>
       </mat-card-footer>
   </mat-card>
 </div>
-
+<button mat-button color="primary" (click)="viewUserList()">Ver Todos</button>
 <!-- TABLA CON REUNIONES -->
 
 
-<!-- 4 cartas con los primeros ikastetxes -->
+
+
+<hr class="w-100">
+
+<!-- CARTAS DE IKASTETXEAK -->
+<h1 class="text-center">COLEGIOS</h1>
+<div class="d-flex justify-content-around mt-5 mb-5">
+  <!-- Recorremos los primeros 4 usuarios y mostramos una carta para cada uno -->
+  <mat-card *ngFor="let school of firstFourSchools" class="stats-card w-15  text-center justify-content-center">
+    <div class="card-header">
+      <div class="card-title text-dark">{{ school.NOM }}</div> <!-- Mostramos el nombre del usuario -->
+      <div class="card-title text-dark">{{ school.DGENRC }}</div>
+
+    </div>
+    <div class="card-content">
+      <div class="">
+        {{ school.DTITUC }} <!-- Mostramos el tipo de usuario -->
+      </div>
+    </div>
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="viewSchoolDetails(school)">Ver más</button>
+      <!-- (click)="viewMoreSchool(school)" -->
+    </mat-card-actions>
+  </mat-card>
 </div>
+<button mat-button color="primary" (click)=" viewSchoolsList()">Ver Todos</button>
+</div>
+

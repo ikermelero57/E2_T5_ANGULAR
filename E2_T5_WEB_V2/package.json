@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently \"npm run start_API\" \"ng serve\" \"json-server --watch ikastetxeak.json\"",
+    "start": "concurrently \"npm run start_API\" \"ng serve\" \"json-server --watch ikastetxeak.json\" \"json-server --watch ikastetxeak.json\" ",
     "start_API": "node ../backend/index.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",

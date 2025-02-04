@@ -1,0 +1,44 @@
+<div class="container mt-5" style="padding-top: 100px;">
+  <h1 class="text-center">USUARIOS</h1>
+  <div class="row">
+    <!-- Tarjeta para cada usuario -->
+    <div class="col-md-4 mb-4" *ngFor="let user of users">
+      <mat-card class="shadow-sm">
+        <!-- Cabecera de la tarjeta -->
+        <mat-card-header>
+          <div mat-card-avatar>
+            <img
+              [src]="user.argazkia || './img/default-user.png'"
+              alt="Foto de perfil"
+              class="avatar w-100"
+            />
+          </div>
+          <mat-card-title>{{ user.nombre }}</mat-card-title>
+          <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <!-- Contenido de la tarjeta -->
+        <mat-card-content class="mt-3">
+          <p><strong>Teléfono:</strong> {{ user.telefono }}</p>
+          <p><strong>Dirección:</strong> {{ user.direccion }}</p>
+          <p>
+            <strong>Tipo de Usuario:</strong> {{ user.tipo_id }}
+          </p>
+        </mat-card-content>
+
+        <!-- Acciones de la tarjeta -->
+        <mat-card-actions class="d-flex justify-content-between">
+          <button mat-button color="primary" (click)="viewUserDetails(user.id)">
+            Ver Detalles
+          </button>
+          <button mat-button color="accent" (click)="editUser(user.id)">
+            Editar
+          </button>
+          <button mat-button color="warn" (click)="deleteUser(user.id)">
+            Eliminar
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
