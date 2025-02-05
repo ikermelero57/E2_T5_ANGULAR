@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-details-user',
+  standalone:true,
   imports: [MatCardModule,MatList,MatDivider,MatListItem,],
   templateUrl: './details-user.component.html',
   styleUrl: './details-user.component.css'

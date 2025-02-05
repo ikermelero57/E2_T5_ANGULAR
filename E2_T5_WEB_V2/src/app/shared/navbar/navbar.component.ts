@@ -6,21 +6,27 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';  // Módulo correcto
 import { MatListModule } from '@angular/material/list';  // Para las listas dentro del sidenav
+import { TranslateService } from '@ngx-translate/core';
+import { MatFormField } from '@angular/material/form-field';
+import { MatOption, MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, MatToolbarModule, MatButtonModule, RouterModule, MatIconModule, MatSidenavModule, MatListModule], // Asegúrate de importar estos módulos
+  imports: [CommonModule, MatToolbarModule, MatButtonModule, RouterModule, MatIconModule,
+    MatSidenavModule, MatListModule,MatFormField,MatSelect,MatOption], // Asegúrate de importar estos módulos
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  selectedLanguage: string = 'es';
   private toggleButton: any;
   public sidebarVisible: boolean = false;
   userRole: number | null = null; // Variable para almacenar el tipo de usuario
 
-  constructor(public location: Location) {
+  constructor(public location: Location, private translate: TranslateService) {
       this.sidebarVisible = false;
+      this.translate.setDefaultLang(this.selectedLanguage);
   }
 
   ngOnInit() {
@@ -68,5 +74,10 @@ export class NavbarComponent implements OnInit {
       //redireccionar a la página de sign up
       window.location.href = '/signup';
       //window.location.reload(); // Recargar la página para limpiar el estado
+  }
+   // Cambia el idioma de la aplicación
+   changeLanguage(lang: string) {
+    this.selectedLanguage = lang;
+    this.translate.use(lang);
   }
 }

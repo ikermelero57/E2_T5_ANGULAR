@@ -4,3 +4,15 @@
 .logo {
   width: 175px;
 }
+.language-selector {
+  width: 120px; /* Ajusta el ancho según sea necesario */
+  margin-left: 1rem; /* Espacio a la izquierda */
+}
+
+.language-selector .mat-form-field-wrapper {
+  padding-bottom: 0; /* Elimina el espacio inferior */
+}
+
+.language-selector .mat-form-field-infix {
+  border-top: 0; /* Elimina el borde superior */
+}

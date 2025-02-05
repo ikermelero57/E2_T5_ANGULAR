@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-school-list',
+  standalone:true,
   imports: [MatCardModule,CommonModule],
   templateUrl: './school-list.component.html',
   styleUrl: './school-list.component.css'

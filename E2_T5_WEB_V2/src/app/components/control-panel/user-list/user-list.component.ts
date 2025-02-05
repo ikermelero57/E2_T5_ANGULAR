@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-user-list',
+  standalone:true,
   imports:[MatCardModule,CommonModule],
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css'],

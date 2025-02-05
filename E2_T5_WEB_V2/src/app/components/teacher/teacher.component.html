@@ -49,12 +49,12 @@
                 <table *ngIf="reuniones && reuniones.length > 0; else noReuniones" class="table table-bordered">
                   <thead>
                     <tr>
-                      <th>Título</th>
+                      <th>{{ 'Titulo' | translate }}</th>
                       <th>Asunto</th>
                       <th>Aula</th>
                       <th>Fecha</th>
                       <th>Estado</th>
-                      <th>Profesor</th>
+                      <th>Alumno</th>
                     </tr>
                   </thead>
                   <tbody>

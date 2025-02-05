@@ -59,6 +59,7 @@
                       <th>Fecha</th>
                       <th>Estado</th>
                       <th>Profesor</th>
+                      <th>Xehetasunak</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -71,6 +72,9 @@
                       <td>
                         {{ reunion.alumno_nombre }}
                         {{ reunion.alumno_apellidos }}
+                      </td>
+                      <td>
+                        <button mat-button color="primary" (click)="viewMeetingsDetails(reunion.id_reunion)">Ikusi</button>
                       </td>
                     </tr>
                   </tbody>

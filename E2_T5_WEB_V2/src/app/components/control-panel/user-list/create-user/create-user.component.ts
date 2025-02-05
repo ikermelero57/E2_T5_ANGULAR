@@ -15,9 +15,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-create-user',
+  standalone:true,
   imports:[MatFormFieldModule,CommonModule,MatInputModule,MatOptionModule,MatSelectModule,
-    MatCardModule, ReactiveFormsModule
-   ],
+    MatCardModule, ReactiveFormsModule],
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.css'],
 })

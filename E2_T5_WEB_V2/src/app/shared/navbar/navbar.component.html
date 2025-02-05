@@ -30,6 +30,15 @@
             <button mat-raised-button color="warn" (click)="logout()">Cerrar Sesión</button>
           </li>
         </ng-container>
+        <li class="nav-item">
+          <mat-form-field appearance="fill" class="language-selector">
+            <mat-select [(value)]="selectedLanguage" (selectionChange)="changeLanguage($event.value)">
+              <mat-option value="es">Castellano</mat-option>
+              <mat-option value="en">English</mat-option>
+              <mat-option value="eu">Euskara</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </li>
       </ul>
     </div>
   </mat-toolbar-row>
@@ -68,6 +77,15 @@
           <a [routerLink]="['/signup']" class="nav-link">Iniciar Sesión</a>
         </li>
       </ng-template>
+      <li mat-list-item>
+        <mat-form-field appearance="fill" class="language-selector">
+          <mat-select [(value)]="selectedLanguage" (selectionChange)="changeLanguage($event.value)">
+            <mat-option value="es">Castellano</mat-option>
+            <mat-option value="en">English</mat-option>
+            <mat-option value="eu">Euskara</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </li>
     </mat-nav-list>
   </mat-drawer>
 

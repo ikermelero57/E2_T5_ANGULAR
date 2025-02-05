@@ -14,13 +14,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-teacher',
   standalone:true,
   imports: [FormsModule,MatCardModule,MatTabsModule,MatTableModule,
     MatButtonModule, MatIconModule,MatFormFieldModule, MatInputModule,
-    MatDividerModule,MatListModule,MatToolbarModule,CommonModule
+    MatDividerModule,MatListModule,MatToolbarModule,CommonModule,TranslateModule
   ],
   templateUrl: './teacher.component.html',
   styleUrl: './teacher.component.css'

@@ -42,6 +42,9 @@ export class ApiService {
     return this.http.get<MeetingStudent[]>(`${environment.baseUrl}/reuniones/estudiante/${estudianteId}`);
   }
 
+  getMeetingById(meetingId:number):Observable<any[]>{
+    return this.http.get<any>(`${environment.baseUrl}/reuniones/${meetingId}`);
+  }
   // getTodayMeetings(): Observable<any[]> {
   //   return this.http.get<any[]>('https://api.example.com/meetings?date=today'); // Asegúrate de ajustar la URL según tu API
   // }

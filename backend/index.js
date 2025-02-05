@@ -10,23 +10,23 @@ app.use(cors());
 app.use(bodyParser.json());
 
 
-// MySQL datu-baserako konexioa sortu
-// const db = mysql.createConnection({
-//     host: '10.5.104.21', // MySQL zerbitzariaren helbidea
-//     user: 'iker', // MySQL erabiltzailea
-//     password: '', // MySQL pasahitza
-//     database: 'calendar', // Datu-basearen izena
-//     port: '3307' , // Portua 
-// });
-
-
+//MySQL datu-baserako konexioa sortu
 const db = mysql.createConnection({
-    host: 'localhost', // MySQL zerbitzariaren helbidea
-    user: 'root', // MySQL erabiltzailea
-    password: 'root', // MySQL pasahitza
+    host: '10.5.104.21', // MySQL zerbitzariaren helbidea
+    user: 'iker', // MySQL erabiltzailea
+    password: '', // MySQL pasahitza
     database: 'calendar', // Datu-basearen izena
-    port: '3306' , // Portua 
+    port: '3307' , // Portua 
 });
+
+
+// const db = mysql.createConnection({
+//     host: 'localhost', // MySQL zerbitzariaren helbidea
+//     user: 'root', // MySQL erabiltzailea
+//     password: 'root', // MySQL pasahitza
+//     database: 'calendar', // Datu-basearen izena
+//     port: '3306' , // Portua 
+// });
 
 
 db.connect((err) => {
@@ -157,7 +157,7 @@ app.get('/reuniones/estudiante/:estudianteId', async (req, res) => {
               console.error('Error al obtener las reuniones del estudiante:', err);
               return res.status(500).send('Error interno del servidor');
             }
-            console.log(results);
+            
           res.send(results)
           });
     } catch (error) {
@@ -191,9 +191,30 @@ app.get('/reuniones/profesor/:profesorId', async (req, res) => {
               console.error('Error al obtener las reuniones del estudiante:', err);
               return res.status(500).send('Error interno del servidor');
             }
-            console.log(results);
+           
           res.send(results)
           });
+    } catch (error) {
+        console.error('Error al obtener las reuniones:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
+});
+
+app.get('/reuniones/:id', async (req, res) => {
+    try {
+      const profesorId = req.params.profesorId;
+      const query = `
+          SELECT * FROM reuniones WHERE id_reunion = ?; 
+          
+      `;
+      db.query(query, [profesorId], (err, results) => {
+          if(err){
+            console.error('Error al obtener las reuniones del estudiante:', err);
+            return res.status(500).send('Error interno del servidor');
+          }
+        
+        res.send(results)
+        });
     } catch (error) {
         console.error('Error al obtener las reuniones:', error);
         res.status(500).json({ message: 'Error interno del servidor' });

@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 import { Horario } from '../../interface/timetable';
 import { ApiService } from '../../services/bd.service';
 import { RouterLink } from '@angular/router';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
@@ -38,7 +38,7 @@ export class AdminComponent {
   hours: number[] = [1, 2, 3, 4, 5]; // Horas del día
 
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit() {
     const user = localStorage.getItem('user');
@@ -76,4 +76,8 @@ export class AdminComponent {
   getHorariosForDayAndHour(day: string, hour: number): Horario[] {
     return this.horarios.filter((horario) => horario.dia === day && +horario.hora === hour);
   }
+  viewMeetingsDetails(reunionID:number){
+    this.router.navigate(['/meeting-detail', reunionID]);
+  }
+
 }

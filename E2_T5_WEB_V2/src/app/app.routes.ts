@@ -10,15 +10,13 @@ import { DetailsSchoolComponent } from './components/control-panel/school-list/d
 import { SchoolListComponent } from './components/control-panel/school-list/school-list.component';
 import { EditUserComponent } from './components/control-panel/user-list/edit-user/edit-user.component';
 import { CreateUserComponent } from './components/control-panel/user-list/create-user/create-user.component';
+import { MeetingDetailComponent } from './components/home/meeting-detail/meeting-detail.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, canActivate: [authGuard] },
-
-  // Bloquea a usuarios autenticados en el login
   { path: 'signup', component: LoginComponent, canActivate: [loginGuard] },
-
-  // Solo tipo_id 1 (god) y tipo_id 2 (admin) pueden acceder
+  { path: 'meeting-detail/:id', component: MeetingDetailComponent, canActivate: [authGuard]},
   { path: 'panel-control', component: ControlPanelComponent, canActivate: [authGuard], data: { roles: [1, 2] }, // Solo tipo_id 1 (god) y tipo_id 2 (admin) pueden acceder
     // children: [
     //   // Rutas anidadas bajo panel-control
@@ -26,11 +24,11 @@ export const routes: Routes = [
     //    // Detalles de escuela
     // ],
   },
-  { path: 'users', component: UserListComponent }, // Detalles de usuario
-  { path: 'user/:id', component: DetailsUserComponent }, // Detalles de usuario
-  { path: 'edit-user/:id', component: EditUserComponent },
-  { path: 'users/create', component: CreateUserComponent },
+  { path: 'users', component: UserListComponent , canActivate: [authGuard], data: { roles: [1, 2] }}, // Detalles de usuario
+  { path: 'user/:id', component: DetailsUserComponent , canActivate: [authGuard], data: { roles: [1, 2] }}, // Detalles de usuario
+  { path: 'edit-user/:id', component: EditUserComponent , canActivate: [authGuard], data: { roles: [1, 2] }},
+  { path: 'users/create', component: CreateUserComponent, canActivate: [authGuard], data: { roles: [1, 2] }},
 
-  { path: 'schools', component: SchoolListComponent }, // Detalles de escuela
-  { path: 'school/:id', component: DetailsSchoolComponent },
+  { path: 'schools', component: SchoolListComponent, canActivate: [authGuard], data: { roles: [1, 2] } }, // Detalles de escuela
+  { path: 'school/:id', component: DetailsSchoolComponent, canActivate: [authGuard], data: { roles: [1, 2] }},
 ];

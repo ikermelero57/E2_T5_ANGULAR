@@ -13,6 +13,7 @@ import { MatOptionModule } from '@angular/material/core'; // Para mat-option
 
 @Component({
   selector: 'app-edit-user',
+  standalone:true,
   imports:[MatFormFieldModule,MatSelectModule,MatCardModule,ReactiveFormsModule,
           CommonModule,MatInputModule,MatOptionModule
   ],
