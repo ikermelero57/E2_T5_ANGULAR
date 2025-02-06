@@ -1,1 +1,18 @@
-<p>meeting-detail works!</p>
+<div class="meeting-detail-container" style="padding-top: 10em;">
+  <h1>{{ meeting?.titulo || 'Detalles de la Reunión' }}</h1>
+<div>
+    <h2>Información de la Reunión</h2>
+    <p><strong>Fecha:</strong> {{ meeting?.titulo }}</p>
+    <p><strong>Descripción:</strong> {{ meeting?.asunto }}</p>
+    <p><strong>Centro Educativo:</strong> {{ ikastetxe?.NOM || 'Cargando...' }}</p>
+    <p><strong>Dirección:</strong> {{ ikastetxe?.DOMI || 'Cargando...' }}</p>
+  </div>
+
+  <div class="map-container">
+    <h2>Ubicación del Centro Educativo</h2>
+    <div id="map" style="height: 400px;"></div>
+  </div>
+
+  <p>Cargando detalles del centro...</p>
+</div>
+

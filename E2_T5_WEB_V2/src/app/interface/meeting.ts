@@ -1,3 +1,18 @@
+export interface Meeting {
+  id_reunion:  number;
+  estado:      string;
+  estado_eus:  string;
+  profesor_id: number;
+  alumno_id:   number;
+  id_centro:   number;
+  titulo:      string;
+  asunto:      string;
+  aula:        string;
+  fecha:       Date;
+  dia:         string;
+  hora:        string;
+  }
+
 export interface MeetingStudent {
   id_reunion: number;
   titulo: string;
@@ -9,7 +24,6 @@ export interface MeetingStudent {
   //profesorId: number; // ID del profesor que organiza la reunión
   profesor_nombre: string;
   profesor_apellidos: string;
-
 }
 
 

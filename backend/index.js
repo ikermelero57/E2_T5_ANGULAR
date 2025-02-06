@@ -202,17 +202,16 @@ app.get('/reuniones/profesor/:profesorId', async (req, res) => {
 
 app.get('/reuniones/:id', async (req, res) => {
     try {
-      const profesorId = req.params.profesorId;
+      const id = req.params.id;
       const query = `
-          SELECT * FROM reuniones WHERE id_reunion = ?; 
-          
+          SELECT * FROM reuniones WHERE id_reunion = ?;
       `;
-      db.query(query, [profesorId], (err, results) => {
+      db.query(query, [id], (err, results) => {
           if(err){
             console.error('Error al obtener las reuniones del estudiante:', err);
             return res.status(500).send('Error interno del servidor');
           }
-        
+        console.log(results);
         res.send(results)
         });
     } catch (error) {
