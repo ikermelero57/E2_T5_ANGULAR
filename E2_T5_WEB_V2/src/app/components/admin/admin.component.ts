@@ -29,6 +29,9 @@ import { Router } from '@angular/router';
 export class AdminComponent {
   userName: string = '';
   userSurname: string = '';
+  userDni: string = '';
+  userDireccion:string = '';
+  userTelefono: string = '';
   userRole: number | null = null;
   userImage: string = '';
   userId: number | null = null;
@@ -45,6 +48,10 @@ export class AdminComponent {
     if (user) {
       const userData = JSON.parse(user);
       this.userName = userData.nombre;
+      this.userSurname = userData.apellidos;
+      this.userDni = userData.dni;
+      this.userDireccion = userData.direccion;
+      this.userTelefono = userData.telefono1;
       this.userId = userData.id;
 
       if (this.userId) {

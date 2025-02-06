@@ -9,11 +9,13 @@
             </div>
             <h2 class="title">{{ userName }} {{ userSurname }}</h2>
             <h6 class="description">Irakasle</h6>
+            <p>DNI: {{userDni}}</p>
+            <p>Direccion: {{userDireccion}}</p>
+            <p>Telefono: {{userTelefono}}</p>
             <a mat-fab extended color="primary" [routerLink]="'/panel-control'">
               <mat-icon>settings</mat-icon>
               Control Panel
             </a>
-
       </div>
 
       <div class="text-center mt-4">

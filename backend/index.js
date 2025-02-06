@@ -11,22 +11,22 @@ app.use(bodyParser.json());
 
 
 //MySQL datu-baserako konexioa sortu
-const db = mysql.createConnection({
-    host: '10.5.104.21', // MySQL zerbitzariaren helbidea
-    user: 'iker', // MySQL erabiltzailea
-    password: '', // MySQL pasahitza
-    database: 'calendar', // Datu-basearen izena
-    port: '3307' , // Portua 
-});
-
-
 // const db = mysql.createConnection({
-//     host: 'localhost', // MySQL zerbitzariaren helbidea
-//     user: 'root', // MySQL erabiltzailea
-//     password: 'root', // MySQL pasahitza
+//     host: '10.5.104.21', // MySQL zerbitzariaren helbidea
+//     user: 'iker', // MySQL erabiltzailea
+//     password: '', // MySQL pasahitza
 //     database: 'calendar', // Datu-basearen izena
-//     port: '3306' , // Portua 
+//     port: '3307' , // Portua 
 // });
+
+
+const db = mysql.createConnection({
+    host: 'localhost', // MySQL zerbitzariaren helbidea
+    user: 'root', // MySQL erabiltzailea
+    password: 'root', // MySQL pasahitza
+    database: 'calendar', // Datu-basearen izena
+    port: '3306' , // Portua 
+});
 
 
 db.connect((err) => {

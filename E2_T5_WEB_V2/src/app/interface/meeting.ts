@@ -4,7 +4,7 @@ export interface Meeting {
   estado_eus:  string;
   profesor_id: number;
   alumno_id:   number;
-  id_centro:   number;
+  id_centro:   string;
   titulo:      string;
   asunto:      string;
   aula:        string;

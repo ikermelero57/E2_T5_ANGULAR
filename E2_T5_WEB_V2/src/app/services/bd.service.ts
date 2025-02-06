@@ -1,3 +1,4 @@
+import { Meeting } from './../interface/meeting';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -5,6 +6,7 @@ import { MeetingStudent, MeetingTeacher } from '../interface/meeting';
 import { Horario, HorarioIkasle } from '../interface/timetable';
 import { School } from '../interface/school';
 import { environment } from '../../environments/environment.development';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -42,9 +44,10 @@ export class ApiService {
     return this.http.get<MeetingStudent[]>(`${environment.baseUrl}/reuniones/estudiante/${estudianteId}`);
   }
 
-  getMeetingById(meetingId:number):Observable<any[]>{
-    return this.http.get<any>(`${environment.baseUrl}/reuniones/${meetingId}`);
+  getMeetingById(meetingId: number): Observable<Meeting> {
+    return this.http.get<Meeting[]>(`${environment.baseUrl}/reuniones/${meetingId}`).pipe(map(response => response[0]));
   }
+
   // getTodayMeetings(): Observable<any[]> {
   //   return this.http.get<any[]>('https://api.example.com/meetings?date=today'); // Asegúrate de ajustar la URL según tu API
   // }

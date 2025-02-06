@@ -1,18 +1,27 @@
-<div class="meeting-detail-container" style="padding-top: 10em;">
-  <h1>{{ meeting?.titulo || 'Detalles de la Reunión' }}</h1>
-<div>
-    <h2>Información de la Reunión</h2>
-    <p><strong>Fecha:</strong> {{ meeting?.titulo }}</p>
-    <p><strong>Descripción:</strong> {{ meeting?.asunto }}</p>
-    <p><strong>Centro Educativo:</strong> {{ ikastetxe?.NOM || 'Cargando...' }}</p>
-    <p><strong>Dirección:</strong> {{ ikastetxe?.DOMI || 'Cargando...' }}</p>
-  </div>
+<div class="container">
+  <div class="meeting-detail-container" style="padding-top: 10em;">
+    <!-- Contenido principal -->
 
-  <div class="map-container">
-    <h2>Ubicación del Centro Educativo</h2>
-    <div id="map" style="height: 400px;"></div>
-  </div>
+      <h1>{{ meeting?.titulo || 'Reunión sin título' }}</h1>
 
-  <p>Cargando detalles del centro...</p>
+      <div class="meeting-info">
+        <h2>Detalles de la reunión</h2>
+        <p><strong>Fecha:</strong> {{ meeting?.fecha | date:'dd/MM/yyyy' }}</p>
+        <p><strong>Aula:</strong> {{ meeting?.aula}}</p>
+        <p><strong>Titulo:</strong> {{ meeting?.titulo}}</p>
+        <p><strong>Asunto:</strong> {{ meeting?.asunto || 'Sin descripción' }}</p>
+      </div>
+
+      <div class="school-info" *ngIf="ikastetxe">
+        <h2>Información del centro</h2>
+        <p><strong>Nombre:</strong> {{ ikastetxe.NOM }}</p>
+        <p><strong>Dirección:</strong> {{ ikastetxe.DOMI }}</p>
+      </div>
+
+      <div *ngIf="ikastetxe" class="map-container">
+        <h2>Ubicación del Centro</h2>
+        <div id="map" style="height: 400px; width: 100%;"></div>
+      </div>
+
+  </div>
 </div>
-
