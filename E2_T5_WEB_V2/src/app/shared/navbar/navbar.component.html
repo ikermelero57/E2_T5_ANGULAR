@@ -33,9 +33,8 @@
         <li class="nav-item">
           <mat-form-field appearance="fill" class="language-selector">
             <mat-select [(value)]="selectedLanguage" (selectionChange)="changeLanguage($event.value)">
-              <mat-option value="es">Castellano</mat-option>
-              <mat-option value="en">English</mat-option>
-              <mat-option value="eu">Euskara</mat-option>
+              <mat-option value="es">EU</mat-option>
+              <mat-option value="eu">ES</mat-option>
             </mat-select>
           </mat-form-field>
         </li>
@@ -80,17 +79,11 @@
       <li mat-list-item>
         <mat-form-field appearance="fill" class="language-selector">
           <mat-select [(value)]="selectedLanguage" (selectionChange)="changeLanguage($event.value)">
-            <mat-option value="es">Castellano</mat-option>
-            <mat-option value="en">English</mat-option>
-            <mat-option value="eu">Euskara</mat-option>
+            <mat-option value="es">ES</mat-option>
+            <mat-option value="eu">EU</mat-option>
           </mat-select>
         </mat-form-field>
       </li>
     </mat-nav-list>
   </mat-drawer>
-
-  <!-- Contenido principal -->
-  <mat-drawer-content>
-    <router-outlet></router-outlet> <!-- Aquí va el contenido de la aplicación -->
-  </mat-drawer-content>
 </mat-drawer-container>

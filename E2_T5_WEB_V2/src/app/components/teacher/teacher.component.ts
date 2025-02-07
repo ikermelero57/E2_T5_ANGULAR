@@ -15,6 +15,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { TranslateModule } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-teacher',
@@ -30,6 +31,9 @@ export class TeacherComponent implements OnInit{
 
   userName: string = '';
   userSurname: string = '';
+  userDni: string = '';
+  userDireccion:string = '';
+  userTelefono: string = '';
   userRole: number | null = null;
   userImage: string = '';
   userId: number | null = null;
@@ -43,13 +47,17 @@ export class TeacherComponent implements OnInit{
   displayedColumns: string[] = ['hora', ...this.weekDays];
 
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private router:Router) {}
 
   ngOnInit() {
     const user = localStorage.getItem('user');
     if (user) {
       const userData = JSON.parse(user);
       this.userName = userData.nombre;
+      this.userSurname = userData.apellidos;
+      this.userDni = userData.dni;
+      this.userDireccion = userData.direccion;
+      this.userTelefono = userData.telefono1;
       this.userId = userData.id;
 
       if (this.userId) {
@@ -105,6 +113,9 @@ export class TeacherComponent implements OnInit{
       (horario) => horario.dia === day && +horario.hora === hour
     );
     return horariosForThisHour.length > 0 ? [horariosForThisHour[0]] : [];
+  }
+  viewMeetingsDetails(reunionID:number){
+    this.router.navigate(['/meeting-detail', reunionID]);
   }
 
   filterStudents() {

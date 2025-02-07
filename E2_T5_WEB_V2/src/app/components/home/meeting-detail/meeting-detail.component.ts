@@ -57,20 +57,20 @@ export class MeetingDetailComponent implements OnInit {
                   container: 'map', // ID del contenedor
                   accessToken: 'pk.eyJ1IjoiaXR6aS1hciIsImEiOiJjbTR0cnJvbmgwOG1xMmpyOXphYnk2YXA3In0.nvbObADvRjZvchA9t_gJog',
                   style: 'mapbox://styles/mapbox/streets-v12',
-                  center: [this.ikastetxe!.LONGITUD, this.ikastetxe!.LATITUD], // Usar las coordenadas de la escuela
+                  center: [this.ikastetxe!.LATITUD,this.ikastetxe!.LONGITUD], // Usar las coordenadas de la escuela
                   zoom: 15
                 });
 
                 // Añadir marcador
                 new mapboxgl.Marker({ color: '#FF0000' })
-                  .setLngLat([this.ikastetxe!.LONGITUD, this.ikastetxe!.LATITUD])
+                  .setLngLat([this.ikastetxe!.LATITUD,this.ikastetxe!.LONGITUD])
                   .setPopup(new mapboxgl.Popup({ offset: 25 }) // Popup opcional
                     .setHTML(`
                       <strong>${this.ikastetxe!.NOM}</strong><br>
                       ${this.ikastetxe!.DOMI}
                     `))
                   .addTo(this.map);
-              }, 0); // Retraso de 0 milisegundos
+              }, 12); // Retraso de 0 milisegundos
             }
           },
           error: (err) => console.error('Error al cargar escuelas:', err)

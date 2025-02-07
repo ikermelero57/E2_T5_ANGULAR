@@ -8,32 +8,28 @@
               <img [src]="userImage || './img/default-user.png'" alt="Profile Image" class="img-circle img-responsive" style="border-radius:580px">
             </div>
             <h2 class="title">{{ userName }} {{ userSurname }}</h2>
-            <h6 class="description">Irakasle</h6>
-            <p>DNI: {{userDni}}</p>
-            <p>Direccion: {{userDireccion}}</p>
-            <p>Telefono: {{userTelefono}}</p>
+            <h6 class="description">{{ 'Irakaslea' | translate }}</h6>
+        <p>{{ 'DNI' | translate }}: {{userDni}}</p>
+        <p>{{ 'Helbidea' | translate }}: {{userDireccion}}</p>
+        <p>{{ 'Telefonoa' | translate }}: {{userTelefono}}</p>
             <a mat-fab extended color="primary" [routerLink]="'/panel-control'">
               <mat-icon>settings</mat-icon>
-              Control Panel
+              {{'Control Panela' | translate}}
             </a>
-      </div>
-
-      <div class="text-center mt-4">
-        <p>Explora y gestiona tus horarios y reuniones, y busca estudiantes según su nombre o email.</p>
       </div>
       <mat-card class="mt-4">
         <mat-card-content>
           <mat-tab-group >
             <!-- Tab para Horarios -->
             <!-- Tab para Horarios -->
-            <mat-tab label="Horario">
+            <mat-tab label="{{ 'Ordutegia' | translate }}">
               <div class="following" id="follows">
-                <h4 class="mb-3 mt-4">Horarios</h4>
+                <h4 class="mb-3 mt-4">{{ 'Ordutegiak' | translate }}</h4>
                 <table class="table table-bordered table-striped table-hover text-center">
                   <thead class="table-light">
                     <tr>
-                      <th class="align-middle" style="width:10%;">Hora</th>
-                      <th *ngFor="let day of weekDays" class="align-middle" style="width:15%;">{{ day }}</th>
+                      <th class="align-middle" style="width:10%;">{{ 'Ordua' | translate }}</th>
+                      <th *ngFor="let day of weekDays" class="align-middle" style="width:15%;">{{ day | translate }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -49,19 +45,19 @@
                 </table>
               </div>
             </mat-tab>
-            <mat-tab label="Reuniones">
+            <mat-tab label=">{{ 'Bilerak' | translate }}">
               <div class="d-flex flex-column following" id="follows">
-                <h4 class=" mb-3 mt-4">Reuniones</h4>
+                <h4 class=" mb-3 mt-4">>{{ 'Bilerak' | translate }}</h4>
                 <table *ngIf="reuniones && reuniones.length > 0; else noReuniones" class="table table-bordered">
                   <thead>
                     <tr>
-                      <th>Título</th>
-                      <th>Asunto</th>
-                      <th>Aula</th>
-                      <th>Fecha</th>
-                      <th>Estado</th>
-                      <th>Profesor</th>
-                      <th>Xehetasunak</th>
+                      <th>{{ 'Titulua' | translate }}</th>
+                      <th>{{ 'Gaia' | translate }}</th>
+                      <th>{{ 'Gela' | translate }}</th>
+                      <th>{{ 'Data' | translate }}</th>
+                      <th>{{ 'Egoera' | translate }}</th>
+                      <th>{{ 'Ikaslea' | translate }}</th>
+                      <th>{{ 'Xehetasunak' | translate }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -89,6 +85,25 @@
           </mat-tab-group>
         </mat-card-content>
       </mat-card>
+      <h4 class="mt-5">{{ 'Ikasleak bilatu' | translate }}</h4>
+      <mat-form-field class="full-width">
+        <mat-label>{{ 'Ikaslea bilatu' | translate }}</mat-label>
+        <input matInput [(ngModel)]="searchTerm" placeholder="{{ 'Izena edo emaila' | translate }}" (input)="filterStudents()">
+      </mat-form-field>
+      <!-- <button mat-raised-button color="accent" (click)="fetchStudents()">{{ 'Ikasleak kargatu' | translate }}</button> -->
+      <table mat-table [dataSource]="filteredStudents" class="mat-elevation-z8 mb-5" *ngIf="filteredStudents.length > 0">
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef> {{ 'Izena' | translate }} </th>
+          <td mat-cell *matCellDef="let student"> {{ student.nombre }} </td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> {{ 'Emaila' | translate }} </th>
+          <td mat-cell *matCellDef="let student"> {{ student.email }} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="['nombre', 'email']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['nombre', 'email']"></tr>
+      </table>
+      <p *ngIf="filteredStudents.length === 0">{{ 'Ez dira ikasleak aurkitu' | translate }}</p>
     </div>
   </div>
 </div>

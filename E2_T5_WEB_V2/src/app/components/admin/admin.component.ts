@@ -16,13 +16,14 @@ import { Horario } from '../../interface/timetable';
 import { ApiService } from '../../services/bd.service';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-admin',
   standalone:true,
   imports: [RouterLink,FormsModule,MatCardModule,MatTabsModule,MatTableModule,
       MatButtonModule, MatIconModule,MatFormFieldModule, MatInputModule,
-      MatDividerModule,MatListModule,MatToolbarModule,CommonModule],
+      MatDividerModule,MatListModule,MatToolbarModule,CommonModule,TranslateModule],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
@@ -39,6 +40,9 @@ export class AdminComponent {
   reuniones: MeetingTeacher[] = [];
   weekDays: string[] = ['L/A', 'M/A', 'X', 'J/O', 'V/O']; // Días de la semana
   hours: number[] = [1, 2, 3, 4, 5]; // Horas del día
+  students: any[] = []; // Lista de estudiantes
+  filteredStudents: any[] = [];
+  searchTerm: string = '';
 
 
   constructor(private apiService: ApiService, private router: Router) {}
@@ -53,7 +57,16 @@ export class AdminComponent {
       this.userDireccion = userData.direccion;
       this.userTelefono = userData.telefono1;
       this.userId = userData.id;
-
+      this.apiService.getUsers().subscribe(
+        (data: any) => {
+          this.students = data.filter((student: any) => student.tipo_id === 4);
+          console.log(this.students);
+          this.filterStudents(); // Aplica el filtro después de cargar
+        },
+        (error) => {
+          console.error('Error al cargar los estudiantes:', error);
+        }
+      );
       if (this.userId) {
         this.apiService.getHorariosByProfeId(this.userId).subscribe(
           (data: Horario[]) => {
@@ -85,6 +98,12 @@ export class AdminComponent {
   }
   viewMeetingsDetails(reunionID:number){
     this.router.navigate(['/meeting-detail', reunionID]);
+  }
+  filterStudents() {
+    this.filteredStudents = this.students.filter(student =>
+      student.nombre.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      student.email.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
 
 }

@@ -8,26 +8,25 @@
               <img [src]="userImage || './img/default-user.png'" alt="Profile Image" class="img-circle img-responsive" style="border-radius:580px">
             </div>
             <h2 class="title">{{ userName }} {{ userSurname }}</h2>
-            <h6 class="description">Ikasle</h6>
+            <h6 class="description">{{ 'Ikaslea' | translate }}</h6>
+            <p>{{ 'DNI' | translate }}: {{userDni}}</p>
+            <p>{{ 'Helbidea' | translate }}: {{userDireccion}}</p>
+            <p>{{ 'Telefonoa' | translate }}: {{userTelefono}}</p>
 
-      </div>
-
-      <div class="text-center mt-4">
-        <p>Explora y gestiona tus horarios y reuniones, y busca estudiantes según su nombre o email.</p>
       </div>
       <mat-card class="mt-4">
         <mat-card-content>
           <mat-tab-group >
             <!-- Tab para Horarios -->
             <!-- Tab para Horarios -->
-            <mat-tab label="Horario">
+            <mat-tab label="{{ 'Ordutegia' | translate }}">
               <div class="following" id="follows">
-                <h4 class="mb-3 mt-4">Horarios</h4>
+                <h4 class="mb-3 mt-4">{{ 'Ordutegia' | translate }}</h4>
                 <table class="table table-bordered table-striped table-hover text-center">
                   <thead class="table-light">
                     <tr>
-                      <th class="align-middle" style="width:10%;">Hora</th>
-                      <th *ngFor="let day of weekDays" class="align-middle" style="width:15%;">{{ day }}</th>
+                      <th class="align-middle" style="width:10%;">{{ 'Ordua' | translate }}</th>
+                      <th *ngFor="let day of weekDays" class="align-middle" style="width:15%;">{{ day | translate }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -43,18 +42,19 @@
                 </table>
               </div>
             </mat-tab>
-            <mat-tab label="Reuniones">
+            <mat-tab label="{{ 'Bilerak' | translate }}">
               <div class="d-flex flex-column following" id="follows">
-                <h4 class=" mb-3 mt-4">Reuniones</h4>
+                <h4 class=" mb-3 mt-4">{{ 'Bilerak' | translate }}</h4>
                 <table *ngIf="reuniones && reuniones.length > 0; else noReuniones" class="table table-bordered">
                   <thead>
                     <tr>
-                      <th>Título</th>
-                      <th>Asunto</th>
-                      <th>Aula</th>
-                      <th>Fecha</th>
-                      <th>Estado</th>
-                      <th>Profesor</th>
+                      <th>{{ 'Titulua' | translate }}</th>
+                      <th>{{ 'Gaia' | translate }}</th>
+                      <th>{{ 'Gela' | translate }}</th>
+                      <th>{{ 'Data' | translate }}</th>
+                      <th>{{ 'Egoera' | translate }}</th>
+                      <th>{{ 'Ikaslea' | translate }}</th>
+                      <th>{{ 'Xehetasunak' | translate }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -68,11 +68,14 @@
                         {{ reunion.profesor_nombre }}
                         {{ reunion.profesor_apellidos }}
                       </td>
+                      <td>
+                        <button mat-button color="primary" (click)="viewMeetingsDetails(reunion.id_reunion)">Ikusi</button>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
                 <ng-template #noReuniones>
-                  <p>No tienes reuniones.</p>
+                  <p>{{ 'Ez duzu bilerarik' | translate }}</p>
                 </ng-template>
               </div>
             </mat-tab>
