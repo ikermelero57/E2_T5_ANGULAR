@@ -1,0 +1,66 @@
+<h1>Iker Melero Polo 10/02/25</h1>
+<h2>HOME</h2>
+
+
+<table border=1>
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>Marka</td>
+      <td>Modeloa</td>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- <tr *ngFor="autoa of autoak"| paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }"></tr> -->
+    <tr *ngFor="let autoa of autoak">
+      <td> {{autoa.id}}</td>
+      <td>{{autoa.marka}}</td>
+      <td>{{autoa.modeloa}}</td>
+      <!-- <td><button (click)="aukeratu(autoa.id)">Auketaru</button></td> -->
+      <td><button>Auketaru</button></td>
+      <td><button mat-raised-button (click)="ezabatu(autoa.id)">Ezabatu</button></td>
+    </tr>
+
+  </tbody>
+</table>
+<br>
+<div>
+  <h3>Aldatu</h3>
+  <form (ngSubmit)="aldatu()">
+    <label for="id">Id</label>
+    <input type="number" name ="id" [(ngModel)]="id"  [ngModelOptions]="{standalone: true}">
+
+    <label for="marka">Marka</label>
+    <input type="text" name="marka" [(ngModel)]="marka" [ngModelOptions]="{standalone: true}">
+
+    <label for="modeloa">Modeloa</label>
+    <input type="text" name="modeloa" [(ngModel)]="modeloa" [ngModelOptions]="{standalone: true}">
+
+    <button mat-raised-button color="primary" class="full-width">Aldatu</button>
+  </form>
+  @if (errorMessage) {
+    <div class="alert alert-danger mt-2">
+      {{ errorMessage }}
+    </div>
+  }
+</div>
+
+<!-- <div>
+  <form (ngSubmit)="gehitu()">
+    <label for="id">Id</label>
+    <input name="id" [(ngModel)]="id" type="text">
+
+    <label for="marka">Marka</label>
+    <input type="text" [(ngModel)]="marka">
+
+    <label for="modeloa">Modeloa</label>
+    <input type="text" [(ngModel)]="modeloa">
+
+    <button mat-raised-button color="primary" class="full-width">Gehitu</button>
+  </form>
+  @if (errorMessage) {
+    <div class="alert alert-danger mt-2">
+      {{ errorMessage }}
+    </div>
+  }
+</div> -->
